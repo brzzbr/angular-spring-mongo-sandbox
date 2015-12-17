@@ -1,0 +1,17 @@
+**/.idea
+**/.settings
+**/.classpath
+**/.project
+**/target
+**/log
+**/overlays
+**/solr_home
+**/db/*.db
+
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.iws
+*.db
