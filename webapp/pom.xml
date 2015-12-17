@@ -17,6 +17,7 @@
         <version.spring.mongodb>1.8.1.RELEASE</version.spring.mongodb>
         <version.jackson>2.6.1</version.jackson>
         <version.jetty>9.3.6.v20151106</version.jetty>
+        <version.embedmongo.plugin>0.3.2</version.embedmongo.plugin>
     </properties>
 
     <dependencies>
@@ -49,6 +50,12 @@
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
             <version>2.11.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.joelittlejohn.embedmongo</groupId>
+            <artifactId>embedmongo-maven-plugin</artifactId>
+            <version>${version.embedmongo.plugin}</version>
         </dependency>
 
         <!-- JSON Serializer for Spring MVC -->
@@ -102,10 +109,12 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+
     <build>
         <finalName>webapp</finalName>
-
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -115,23 +124,48 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${version.jetty}</version>
-                <configuration>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <webApp>
-                        <contextPath>/</contextPath>
-                    </webApp>
-                </configuration>
+                <groupId>com.github.joelittlejohn.embedmongo</groupId>
+                <artifactId>embedmongo-maven-plugin</artifactId>
+                <version>${version.embedmongo.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>start</id>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                        <configuration>
+                            <version>2.6.1</version>
+                            <databaseDirectory>${project.build.directory}/mongotest</databaseDirectory>
+                            <bindIp>127.0.0.1</bindIp>
+                            <wait>true</wait>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.eclipse.jetty</groupId>-->
+                <!--<artifactId>jetty-maven-plugin</artifactId>-->
+                <!--<version>${version.jetty}</version>-->
+                <!--<configuration>-->
+                    <!--<scanIntervalSeconds>10</scanIntervalSeconds>-->
+                    <!--<webApp>-->
+                        <!--<contextPath>/</contextPath>-->
+                    <!--</webApp>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
         </plugins>
+
+        <!--Замена пропертей на значения из pom-->
         <resources>
             <resource>
                 <directory>${project.basedir}/src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
+
     </build>
 </project>
