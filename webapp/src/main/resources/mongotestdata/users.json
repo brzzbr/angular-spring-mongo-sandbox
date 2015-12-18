@@ -1,12 +1,36 @@
 {
-  "_id" : ObjectId("54ad6c3ae764de42070b27b1"),
+  "_id" : ObjectId("111111111111111111111111"),
   "active" : true,
-  "email" : "testuser1@example.com",
-  "firstName" : "Test",
-  "lastName" : "User1",
-  "sp_api_key_id" : "6YQB0A8VXM0X8RVDPPLRHBI7J",
-  "sp_api_key_secret" : "veBw/YFx56Dl0bbiVEpvbjF",
+  "login" : "tzarivan",
+  "email" : "tzarivan@kremlin.com",
+  "firstName" : "Ivan",
+  "lastName" : "Tzar",
+  "encPassword" : "827ccb0eea8a706c4c34a16891f84e7b",
   "lastLogin" : "2015-01-07T17:26:18.996Z",
   "created" : "2015-01-07T17:26:18.995Z",
+  "subs" : []
+},
+{
+  "_id" : ObjectId("111111111111111111111112"),
+  "active" : true,
+  "login" : "johndoe",
+  "email" : "johndoe@gmail.com",
+  "firstName" : "John",
+  "lastName" : "Doe",
+  "encPassword" : "827ccb0eea8a706c4c34a16891f84e7b",
+  "lastLogin" : "2015-02-07T17:26:18.996Z",
+  "created" : "2015-01-17T17:26:18.995Z",
+  "subs" : []
+},
+{
+  "_id" : ObjectId("111111111111111111111113"),
+  "active" : false,
+  "login" : "kermit",
+  "email" : "kermit@gmail.com",
+  "firstName" : "Kermit",
+  "lastName" : "Thefrog",
+  "encPassword" : "827ccb0eea8a706c4c34a16891f84e7b",
+  "lastLogin" : "2015-03-07T17:26:18.996Z",
+  "created" : "2015-01-27T17:26:18.995Z",
   "subs" : []
 }
