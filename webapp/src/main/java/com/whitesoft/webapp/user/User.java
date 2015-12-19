@@ -17,7 +17,7 @@ public class User {
     private String email;
 
     private String login;
-    private String encPassword;
+    private String password;
     private Date lastLogin;
 
     public String getFirstName() {
@@ -52,12 +52,12 @@ public class User {
         this.login = login;
     }
 
-    public String getEncPassword() {
-        return encPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEncPassword(String encPassword) {
-        this.encPassword = encPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Date getLastLogin() {

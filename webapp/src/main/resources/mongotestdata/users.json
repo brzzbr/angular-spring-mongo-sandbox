@@ -4,7 +4,7 @@
   "email" : "tzarivan@kremlin.com",
   "firstName" : "Ivan",
   "lastName" : "Tzar",
-  "encPassword" : "827ccb0eea8a706c4c34a16891f84e7b",
+  "password" : "827ccb0eea8a706c4c34a16891f84e7b",
   "lastLogin" : "2015-01-07T17:26:18.996Z"
 },
 {
@@ -13,7 +13,7 @@
   "email" : "johndoe@gmail.com",
   "firstName" : "John",
   "lastName" : "Doe",
-  "encPassword" : "827ccb0eea8a706c4c34a16891f84e7b",
+  "password" : "827ccb0eea8a706c4c34a16891f84e7b",
   "lastLogin" : "2015-02-07T17:26:18.996Z"
 },
 {
@@ -22,6 +22,6 @@
   "email" : "kermit@gmail.com",
   "firstName" : "Kermit",
   "lastName" : "Thefrog",
-  "encPassword" : "827ccb0eea8a706c4c34a16891f84e7b",
+  "password" : "827ccb0eea8a706c4c34a16891f84e7b",
   "lastLogin" : "2015-03-07T17:26:18.996Z"
 }
