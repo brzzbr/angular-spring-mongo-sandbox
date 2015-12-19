@@ -1,5 +1,6 @@
 package com.whitesoft.webapp.user;
 
+import com.whitesoft.webapp.domain.User;
 import com.whitesoft.webapp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

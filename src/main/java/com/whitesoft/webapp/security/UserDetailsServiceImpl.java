@@ -1,6 +1,6 @@
 package com.whitesoft.webapp.security;
 
-import com.whitesoft.webapp.user.User;
+import com.whitesoft.webapp.domain.User;
 import com.whitesoft.webapp.user.UserRoleEnum;
 import com.whitesoft.webapp.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     protected UserService userService;
 
+    @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
         User user = userService.getUser(s);
-        if(user == null) return null;
+        if(user == null) throw new UsernameNotFoundException("User is absent!");
 
         return new org.springframework.security.core.userdetails.User(
                 user.getLogin(),

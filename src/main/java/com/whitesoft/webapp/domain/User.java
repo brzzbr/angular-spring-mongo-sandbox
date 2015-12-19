@@ -1,4 +1,4 @@
-package com.whitesoft.webapp.user;
+package com.whitesoft.webapp.domain;
 
 import org.springframework.data.annotation.Id;
 
