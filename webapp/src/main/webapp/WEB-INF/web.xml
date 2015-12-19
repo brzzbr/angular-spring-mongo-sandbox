@@ -6,36 +6,6 @@
           version="3.0">
     <display-name>Web application</display-name>
 
-    <!-- Spring Application Context -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/application-context.xml
-        classpath:spring/security-context.xml
-        </param-value>
-    </context-param>
-
-    <listener>
-        <listener-class>
-            org.springframework.web.context.ContextLoaderListener
-        </listener-class>
-    </listener>
-
-    <!-- Spring Dispatcher Servlet Context -->
-    <servlet>
-        <servlet-name>dispatcher</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/dispatcher-servlet.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
     <!-- Character Filter -->
     <filter>
         <filter-name>encodingFilter</filter-name>
