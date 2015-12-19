@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="spots" lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" ng-href="favicon-16x16.png">
+    <meta name="locales" content="ru, en-US">
+    <meta name="default_locale" content="ru">
+    <!-- Page title set in pageTitle directive -->
+    <title>Never Ever Go to London</title>
+
+    <!-- build:css css/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+
+    <!-- plugins:css -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+    <!-- build:css css/main.css -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body class="fixed-nav" ng-class="bodyLock ? 'lock' : ''" style="overflow: hidden">
+
+<div class="full-height" ui-view="" ></div>
+
+
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<!-- endbower -->
+<!-- plugins:js -->
+<!-- endinject -->
+<!-- endbuild -->
+
+<!-- build:js  scripts/main.js -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- endbuild -->
+
+</body>
+</html>
