@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @Configuration
 @EnableMongoRepositories(basePackages = "com.whitesoft.webapp.repositories")
 @PropertySource({ "classpath:database.properties" })
-public class RepositoryConfiguration extends AbstractMongoConfiguration {
+public class MongoConfig extends AbstractMongoConfiguration {
 
     @Value("${mongo.host: localhost}")
     private String host;
