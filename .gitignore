@@ -15,3 +15,9 @@
 *.iml
 *.iws
 *.db
+
+.DS_Store
+frontend/src/main/webapp/node
+frontend/src/main/webapp/node_modules
+frontend/src/main/webapp/dist
+frontend/src/main/webapp/app/lib
