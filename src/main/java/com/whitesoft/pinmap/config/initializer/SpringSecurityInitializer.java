@@ -1,4 +1,4 @@
-package com.whitesoft.backend.config.initializer;
+package com.whitesoft.pinmap.config.initializer;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

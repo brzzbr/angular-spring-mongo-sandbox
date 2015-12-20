@@ -1,6 +1,6 @@
-package com.whitesoft.backend.config.initializer;
+package com.whitesoft.pinmap.config.initializer;
 
-import com.whitesoft.backend.config.AppConfiguration;
+import com.whitesoft.pinmap.config.AppConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**

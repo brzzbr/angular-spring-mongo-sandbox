@@ -1,4 +1,4 @@
-package com.whitesoft.backend.user;
+package com.whitesoft.pinmap.user;
 
 /**
  * Created by borisbondarenko on 19.12.15.

@@ -1,4 +1,4 @@
-package com.whitesoft.backend.config;
+package com.whitesoft.pinmap.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,7 +10,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  * Created by borisbondarenko on 19.12.15.
  */
 @Configuration
-@ComponentScan(basePackages = "com.whitesoft.backend")
+@ComponentScan(basePackages = "com.whitesoft.pinmap")
 @Import({ MvcConfiguration.class, RepositoryConfiguration.class, SecurityConfiguration.class })
 public class AppConfiguration {
 

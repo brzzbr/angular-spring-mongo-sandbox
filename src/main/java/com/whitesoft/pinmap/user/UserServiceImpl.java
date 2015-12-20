@@ -1,11 +1,9 @@
-package com.whitesoft.backend.user;
+package com.whitesoft.pinmap.user;
 
-import com.whitesoft.backend.domain.User;
-import com.whitesoft.backend.repositories.UsersRepository;
+import com.whitesoft.pinmap.domain.User;
+import com.whitesoft.pinmap.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by borisbondarenko on 18.12.15.

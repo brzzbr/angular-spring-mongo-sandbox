@@ -1,8 +1,7 @@
-package com.whitesoft.backend.repositories;
+package com.whitesoft.pinmap.repositories;
 
-import com.whitesoft.backend.domain.User;
+import com.whitesoft.pinmap.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * Created by borisbondarenko on 18.12.15.

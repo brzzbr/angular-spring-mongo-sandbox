@@ -1,8 +1,7 @@
-package com.whitesoft.backend.controllers;
+package com.whitesoft.pinmap.controllers;
 
-import com.whitesoft.backend.user.UserService;
+import com.whitesoft.pinmap.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +17,7 @@ public class UserController {
     protected UserService userService;
 
     @RequestMapping("/user")
-    public Principal user(Principal user){
+    public Principal getCurrentUser(Principal user){
         return user;
     }
 }

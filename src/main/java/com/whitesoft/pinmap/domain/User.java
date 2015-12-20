@@ -1,4 +1,4 @@
-package com.whitesoft.backend.domain;
+package com.whitesoft.pinmap.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -69,4 +69,6 @@ public class User {
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
     }
+
+
 }

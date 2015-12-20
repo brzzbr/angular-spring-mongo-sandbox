@@ -1,4 +1,4 @@
-package com.whitesoft.backend.config;
+package com.whitesoft.pinmap.config;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
  * Created by borisbondarenko on 19.12.15.
  */
 @Configuration
-@EnableMongoRepositories(basePackages = "com.whitesoft.backend.repositories")
+@EnableMongoRepositories(basePackages = "com.whitesoft.pinmap.repositories")
 @PropertySource({ "classpath:database.properties" })
 public class RepositoryConfiguration extends AbstractMongoConfiguration {
 

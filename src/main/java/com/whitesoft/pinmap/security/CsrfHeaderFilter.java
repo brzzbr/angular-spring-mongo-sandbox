@@ -1,4 +1,4 @@
-package com.whitesoft.backend.security;
+package com.whitesoft.pinmap.security;
 
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.filter.OncePerRequestFilter;

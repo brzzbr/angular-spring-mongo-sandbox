@@ -1,4 +1,4 @@
-angular.module('spots', [ 'ngRoute' ]).config(function($routeProvider) {
+angular.module('pinmap', [ 'ngRoute' ]).config(function($routeProvider) {
 
 	$routeProvider.when('/', {
 		templateUrl : 'home.html',

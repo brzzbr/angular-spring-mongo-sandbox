@@ -1,6 +1,6 @@
-package com.whitesoft.backend.user;
+package com.whitesoft.pinmap.user;
 
-import com.whitesoft.backend.domain.User;
+import com.whitesoft.pinmap.domain.User;
 
 /**
  * Created by borisbondarenko on 18.12.15.

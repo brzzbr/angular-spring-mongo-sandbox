@@ -1,8 +1,8 @@
-package com.whitesoft.backend.security;
+package com.whitesoft.pinmap.security;
 
-import com.whitesoft.backend.domain.User;
-import com.whitesoft.backend.user.UserRoleEnum;
-import com.whitesoft.backend.user.UserService;
+import com.whitesoft.pinmap.domain.User;
+import com.whitesoft.pinmap.user.UserRoleEnum;
+import com.whitesoft.pinmap.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
