@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -45,19 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http
-                .httpBasic().and()
-                .logout().and()
-                .authorizeRequests()
-                .antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll().anyRequest()
-                .authenticated().and()
-                .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
-                .csrf().csrfTokenRepository(csrfTokenRepository());
-    }
-
-    private CsrfTokenRepository csrfTokenRepository() {
-        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-        repository.setHeaderName("X-XSRF-TOKEN");
-        return repository;
+        http.csrf().disable();
+        http.formLogin();
+        http.logout();
     }
 }
