@@ -1,4 +1,4 @@
-package unit.com.whitesoft.pinmap.user;
+package unit.com.whitesoft.pinmap.services;
 
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.repositories.UsersRepository;
@@ -48,10 +48,11 @@ public class UserServiceImplTest {
         softAssertions.assertThat(user.getLastName()).isEqualTo(testUser.getLastName());
         softAssertions.assertThat(user.getLogin()).isEqualTo(testUser.getLogin());
         softAssertions.assertThat(user.getPassword()).isEqualTo(testUser.getPassword());
+        softAssertions.assertAll();
     }
 
     @Test
-    public void getNullUser() {
+    public void getUserWithNullResult() {
 
         // Assert
         String testLogin = "testLogin";

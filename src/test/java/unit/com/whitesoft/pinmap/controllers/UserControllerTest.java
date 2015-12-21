@@ -34,7 +34,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getCurrentUserFail(){
+    public void getCurrentUserWithNullResult(){
 
         // Act
         Principal currentUser = userController.getCurrentUser(null);
