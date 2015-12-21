@@ -4,9 +4,9 @@
 (function () {
 
     angular.module('pinmap')
-        .service('authService', ['$q', 'xAuthProvider', authService]);
+        .service('authService', ['$q', 'navigationService', 'xAuthProvider', authService]);
 
-    function authService($q, xAuthProvider) {
+    function authService($q, navigationService, xAuthProvider) {
 
         return {
             login: login,
@@ -14,11 +14,11 @@
             authorize: authorize
         };
 
-        function login(credentials, callback){
+        function login(credentials, callback) {
             var cb = callback || angular.noop;
             var deferred = $q.defer();
 
-            xAuthProvider.login(credentials).then(function (data) {
+            xAuthProvider.login(credentials).then(function () {
                 return cb();
             }).catch(function (err) {
                 this.logout();
@@ -29,26 +29,13 @@
             return deferred.promise;
         }
 
-        function logout(){
+        function logout() {
             xAuthProvider.logout();
-            $rootScope.previousStateName = undefined;
-            $rootScope.previousStateNameParams = undefined;
+            navigationService.goToLoginState();
         }
 
         function authorize(callback) {
-
-            $http.get('api/user', {
-                headers: headers
-            }).success(function (data) {
-                if(!!data.name)
-                    callback(true);
-                else
-                    callback(false);
-            }).error(function () {
-
-                callback(false);
-            });
-
+            return callback(xAuthProvider.isAuthorized());
         }
     }
 })();

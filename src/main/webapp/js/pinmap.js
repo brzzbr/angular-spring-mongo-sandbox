@@ -20,21 +20,20 @@ angular.module('pinmap', ['LocalStorageModule', 'ui.router'])
                 controllerAs: 'ctrl',
                 authenticate: false
             });
+        // Send to login if the URL was not found
+        $urlRouterProvider.otherwise('/home');
 
         $httpProvider.interceptors.push('authExpiredInterceptor');
         $httpProvider.interceptors.push('authInterceptor');
-
-        // Send to login if the URL was not found
-        $urlRouterProvider.otherwise('/home');
     })
-    .run(function ($state, $rootScope, authService) {
+    .run(function ($state, $rootScope, authService, navigationService) {
 
         $rootScope.$on('$stateChangeStart', function (event, toState) {
 
             if (toState.authenticate) {
-                authService.authenticate(function (authenticated) {
+                authService.authorize(function (authenticated) {
                     if (!authenticated) {
-                        authService.redirectToLogin();
+                        navigationService.goToLoginState();
                         event.preventDefault();
                     }
                 });

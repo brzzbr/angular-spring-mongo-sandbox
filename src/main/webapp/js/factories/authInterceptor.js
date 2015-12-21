@@ -4,7 +4,7 @@
 (function () {
 
     angular.module('pinmap')
-        .factory('authInterceptor', function (localStorageService) {
+        .factory('authInterceptor', function ($q, localStorageService) {
             return {
                 // Add authorization token to headers
                 request: function (config) {
@@ -19,15 +19,20 @@
                 }
             };
         })
-        .factory('authExpiredInterceptor', function ($q, localStorageService) {
+        .factory('authExpiredInterceptor', function ($q, $injector, localStorageService) {
             return {
                 responseError: function (response) {
                     // token has expired
                     if (response.status === 401 && (response.data.error == 'invalid_token' || response.data.error == 'Unauthorized')) {
                         localStorageService.remove('token');
+
+                        var authService = $injector.get('authService');
+                        authService.authorize();
+
+                        return $q.reject(response);
                     }
-                    //authService.authorize();
-                    return $q.reject(response);
+
+                    return response;
                 }
             };
         });

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.repository.query.spi.EvaluationContextExtension;
 import org.springframework.data.repository.query.spi.EvaluationContextExtensionSupport;
 import org.springframework.security.access.expression.SecurityExpressionRoot;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -30,6 +31,7 @@ import javax.inject.Inject;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -46,6 +48,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(new Md5PasswordEncoder());
+    }
+
+    @Bean
+    public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
+        return new SecurityEvaluationContextExtension();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+
+        return super.authenticationManager();
     }
 
 
@@ -73,7 +86,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/api/user").permitAll()
+                    .antMatchers("/api/authenticate").permitAll()
 //                    .antMatchers("/api/activate").permitAll()
 //                    .antMatchers("/api/authenticate").permitAll()
 //                    .antMatchers("/api/account/reset_password/init").permitAll()
@@ -107,10 +120,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private XAuthTokenConfigurer securityConfigurerAdapter() {
         return new XAuthTokenConfigurer(userDetailsService, tokenProvider);
     }
-
-    @Bean
-    public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
-        return new SecurityEvaluationContextExtension();
-    }
-
 }
