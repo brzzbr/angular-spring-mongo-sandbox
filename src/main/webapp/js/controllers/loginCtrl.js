@@ -19,16 +19,18 @@
         // Нажатие кнопки Войти
         thisCtrl.login = login;
 
-        function login() {
+        function login(event) {
+            event.preventDefault();
+            authService.login({
+                username: username,
+                password: password
+            }).then(function () {
 
-            authService.login(thisCtrl.username, thisCtrl.password, function (authenticated) {
-                if (authenticated) {
-                    console.log("Login succeeded");
-                    navigationService.goToPreviousState();
-                } else {
-                    console.log("Login failed");
-                    thisCtrl.message = "Wrong credentials!";
-                }
+                thisCtrl.message = '';
+                navigationService.goToDefaultState();
+
+            }).catch(function () {
+                thisCtrl.message = 'Wrong credentials!';
             });
         }
     }

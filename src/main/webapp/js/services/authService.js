@@ -4,50 +4,51 @@
 (function () {
 
     angular.module('pinmap')
-        .service('authService', ['$http', '$window', '$state', authService]);
+        .service('authService', ['$q', 'xAuthProvider', authService]);
 
-    function authService($http, $state) {
-
-        var credentials = {};
+    function authService($q, xAuthProvider) {
 
         return {
-            authenticate: authenticate,
             login: login,
             logout: logout,
-            redirectToLogin: redirectToLogin
+            authorize: authorize
         };
 
-        function authenticate(callback) {
-            var headers = credentials ? {
-                authorization: "Basic "
-                + btoa(credentials.username + ":"
-                    + credentials.password)
-            } : {};
+        function login(credentials, callback){
+            var cb = callback || angular.noop;
+            var deferred = $q.defer();
 
-            $http.get('user', {
+            xAuthProvider.login(credentials).then(function (data) {
+                return cb();
+            }).catch(function (err) {
+                this.logout();
+                deferred.reject(err);
+                return cb(err);
+            }.bind(this));
+
+            return deferred.promise;
+        }
+
+        function logout(){
+            xAuthProvider.logout();
+            $rootScope.previousStateName = undefined;
+            $rootScope.previousStateNameParams = undefined;
+        }
+
+        function authorize(callback) {
+
+            $http.get('api/user', {
                 headers: headers
             }).success(function (data) {
-                callback && callback(!!data.name);
+                if(!!data.name)
+                    callback(true);
+                else
+                    callback(false);
             }).error(function () {
-                callback && callback(false);
+
+                callback(false);
             });
-        }
 
-        function login(username, password, callback) {
-            credentials = {username: username, password: password};
-            authenticate(callback);
-        }
-
-        function logout() {
-            $http.post('logout').success(function (data) {
-                redirectToLogin();
-            }).error(function () {
-                console.log('Logout failed');
-            });
-        }
-
-        function redirectToLogin() {
-            $state.go('login');
         }
     }
 })();

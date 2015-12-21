@@ -20,14 +20,8 @@ public class UserController {
     @Autowired
     protected UserService userService;
 
-    @RequestMapping("/user")
+    @RequestMapping("/api/user")
     public Principal getCurrentUser(Principal user){
         return user;
-    }
-
-    @RequestMapping("/token")
-    @ResponseBody
-    public Map<String,String> token(HttpSession session) {
-        return Collections.singletonMap("token", session.getId());
     }
 }

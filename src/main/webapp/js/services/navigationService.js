@@ -9,7 +9,9 @@
     function navigationService($window, $state) {
 
         return{
-            goToPreviousState: goToPreviousState
+            goToPreviousState: goToPreviousState,
+            goToDefaultState: goToDefaultState,
+            goToLoginState: goToLoginState
         };
 
         function goToPreviousState() {
@@ -42,6 +44,15 @@
 
                 $state.go(defaultState.state, defaultState.params);
             }
+        }
+
+        function goToDefaultState(){
+            var defaultState = getDefaultState();
+            $state.go(defaultState.state, defaultState.params);
+        }
+
+        function goToLoginState(){
+            $state.go('login');
         }
 
         function getDefaultState() {

@@ -2,7 +2,7 @@
  * Created by borisbondarenko on 21.12.15.
  */
 
-angular.module('pinmap', ['ui.router'])
+angular.module('pinmap', ['LocalStorageModule', 'ui.router'])
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
         $stateProvider
@@ -21,7 +21,8 @@ angular.module('pinmap', ['ui.router'])
                 authenticate: false
             });
 
-        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        $httpProvider.interceptors.push('authExpiredInterceptor');
+        $httpProvider.interceptors.push('authInterceptor');
 
         // Send to login if the URL was not found
         $urlRouterProvider.otherwise('/home');
