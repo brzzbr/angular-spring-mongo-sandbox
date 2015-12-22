@@ -1,4 +1,4 @@
-package com.whitesoft.pinmap.user;
+package com.whitesoft.pinmap.services;
 
 /**
  * Created by borisbondarenko on 19.12.15.

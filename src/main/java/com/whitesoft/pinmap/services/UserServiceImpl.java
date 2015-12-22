@@ -1,4 +1,4 @@
-package com.whitesoft.pinmap.user;
+package com.whitesoft.pinmap.services;
 
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.repositories.UsersRepository;

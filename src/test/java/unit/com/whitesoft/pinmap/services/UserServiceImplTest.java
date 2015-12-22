@@ -2,7 +2,7 @@ package unit.com.whitesoft.pinmap.services;
 
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.repositories.UsersRepository;
-import com.whitesoft.pinmap.user.UserServiceImpl;
+import com.whitesoft.pinmap.services.UserServiceImpl;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;
 import org.junit.Test;

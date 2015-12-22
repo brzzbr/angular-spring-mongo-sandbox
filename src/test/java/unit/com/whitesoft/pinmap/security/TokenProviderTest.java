@@ -2,7 +2,7 @@ package unit.com.whitesoft.pinmap.security;
 
 import com.whitesoft.pinmap.config.security.xauth.Token;
 import com.whitesoft.pinmap.config.security.xauth.TokenProvider;
-import com.whitesoft.pinmap.user.UserRoleEnum;
+import com.whitesoft.pinmap.services.UserRoleEnum;
 import org.junit.Test;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
