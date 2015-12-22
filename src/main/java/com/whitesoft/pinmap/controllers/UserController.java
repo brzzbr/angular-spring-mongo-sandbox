@@ -38,7 +38,8 @@ public class UserController {
     protected UserDetailsService userDetailsService;
 
     @RequestMapping(value = "/authenticate",
-            method = RequestMethod.POST)
+            method = RequestMethod.POST
+    )
     public Token authorize(@RequestParam String username, @RequestParam String password) {
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);

@@ -28,6 +28,9 @@ public class Http401UnauthorizedEntryPoint implements AuthenticationEntryPoint {
             ServletException {
 
         log.debug("Pre-authenticated entry point called. Rejecting access");
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Denied");
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getOutputStream().println("{ \"error\": \"Alarm! Access Denied!\" }");
+
     }
 }

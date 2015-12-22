@@ -1,12 +1,12 @@
 /**
  * Created by borisbondarenko on 22.12.15.
  */
-(function(){
+(function () {
 
     angular.module('pinmap')
         .service('xAuthProvider', ['$http', 'localStorageService', xAuthProvider]);
 
-    function xAuthProvider($http, localStorageService){
+    function xAuthProvider($http, localStorageService) {
 
         return {
             login: login,
@@ -16,8 +16,8 @@
             isAuthorized: isAuthorized
         };
 
-        function login(credentials){
-            var data = "username=" +  encodeURIComponent(credentials.username) + "&password="
+        function login(credentials) {
+            var data = "username=" + encodeURIComponent(credentials.username) + "&password="
                 + encodeURIComponent(credentials.password);
             return $http.post('/api/authenticate', data, {
                 headers: {
@@ -28,9 +28,6 @@
                 localStorageService.set('token', response);
                 localStorageService.set('isAuthorized', true);
                 return response;
-            }).error(function (response){
-                localStorageService.clearAll();
-                return response;
             });
         }
 
@@ -38,15 +35,15 @@
             localStorageService.clearAll();
         }
 
-        function getToken(){
+        function getToken() {
             return localStorageService.get('token');
         }
 
-        function isAuthorized(){
+        function isAuthorized() {
             return localStorageService.get('isAuthorized');
         }
 
-        function hasValidToken(){
+        function hasValidToken() {
             var token = this.getToken();
             return token && token.expires && token.expires > new Date().getTime();
         }

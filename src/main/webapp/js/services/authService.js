@@ -18,7 +18,10 @@
             var cb = callback || angular.noop;
             var deferred = $q.defer();
 
-            xAuthProvider.login(credentials).then(function () {
+            xAuthProvider.login(credentials).then(function (data) {
+                if(data.status == 401){
+                    throw "Unauthorized!";
+                }
                 return cb();
             }).catch(function (err) {
                 this.logout();
