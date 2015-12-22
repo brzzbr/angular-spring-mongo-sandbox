@@ -10,6 +10,12 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 /**
  * Created by borisbondarenko on 19.12.15.
+ *
+ * Spring context configuration for persistence layer. In the project
+ * I intended to use a MongoDB in this role, so configuration
+ * sets host, port, db name and returns a Mongo object.
+ *
+ * @author brzzbr
  */
 @Configuration
 @EnableMongoRepositories(basePackages = "com.whitesoft.pinmap.repositories")

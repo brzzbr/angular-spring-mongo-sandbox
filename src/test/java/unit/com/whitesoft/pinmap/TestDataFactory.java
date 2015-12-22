@@ -4,6 +4,10 @@ import com.whitesoft.pinmap.domain.User;
 
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * Factory class for test data.
+ *
+ * @author brzzbr
  */
 public final class TestDataFactory {
 

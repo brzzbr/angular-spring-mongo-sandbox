@@ -1,12 +1,16 @@
 package com.whitesoft.pinmap.config;
 
-import com.whitesoft.pinmap.security.xauth.TokenProvider;
+import com.whitesoft.pinmap.config.security.xauth.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
-* Configures x-auth-token security.
-*/
+ * Created by borisbondarenko on 19.12.15.
+ *
+ * Simple config for a {@link TokenProvider}. Properties are hardcoded yet.
+ *
+ * @author brzzbr
+ */
 @Configuration
 public class XAuthConfiguration {
 

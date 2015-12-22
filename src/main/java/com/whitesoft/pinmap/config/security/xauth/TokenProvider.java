@@ -1,12 +1,16 @@
-package com.whitesoft.pinmap.security.xauth;
+package com.whitesoft.pinmap.config.security.xauth;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.codec.Hex;
-import org.springframework.stereotype.Component;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * FROM JHIPSTER Generator. Thank you guys!
+ * <p>
+ * Class that helps to emit token for authenticated user.
+ */
 public class TokenProvider {
 
     private final String secretKey;

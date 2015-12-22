@@ -1,7 +1,7 @@
 package unit.com.whitesoft.pinmap.security;
 
-import com.whitesoft.pinmap.security.xauth.Token;
-import com.whitesoft.pinmap.security.xauth.TokenProvider;
+import com.whitesoft.pinmap.config.security.xauth.Token;
+import com.whitesoft.pinmap.config.security.xauth.TokenProvider;
 import com.whitesoft.pinmap.user.UserRoleEnum;
 import org.junit.Test;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by borisbondarenko on 22.12.15.
+ *
+ * Unit tests for {@link TokenProvider}.
  */
 public class TokenProviderTest {
 
@@ -28,6 +30,9 @@ public class TokenProviderTest {
     protected String testPassword = "testPassword";
     protected String testAuthToken = testUser + ":azaza:expires";
 
+    /**
+     * Get the username from token
+     */
     @Test
     public void getUserNameFromToken(){
 
@@ -38,6 +43,9 @@ public class TokenProviderTest {
         assertThat(userNameFromToken).isEqualTo(testUser);
     }
 
+    /**
+     * Tests correct token creation for test credentials
+     */
     @Test
     public void createToken(){
 

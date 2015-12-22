@@ -7,6 +7,10 @@ import java.util.Date;
 
 /**
  * Created by borisbondarenko on 18.12.15.
+ *
+ * Domain entity for user.
+ *
+ * @author brzzbr
  */
 @Document(collection = "users")
 public class User {

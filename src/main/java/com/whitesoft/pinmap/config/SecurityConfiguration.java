@@ -1,33 +1,33 @@
 package com.whitesoft.pinmap.config;
 
-import com.whitesoft.pinmap.security.*;
-import com.whitesoft.pinmap.security.xauth.TokenProvider;
-import com.whitesoft.pinmap.security.xauth.XAuthTokenConfigurer;
+import com.whitesoft.pinmap.config.security.*;
+import com.whitesoft.pinmap.config.security.xauth.TokenProvider;
+import com.whitesoft.pinmap.config.security.xauth.XAuthTokenConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.repository.query.spi.EvaluationContextExtension;
-import org.springframework.data.repository.query.spi.EvaluationContextExtensionSupport;
-import org.springframework.security.access.expression.SecurityExpressionRoot;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
-import org.springframework.security.web.csrf.CsrfFilter;
-
-import javax.inject.Inject;
 
 /**
  * Created by borisbondarenko on 19.12.15.
+ *
+ * Configuration for a Spring Security. Here we have a token-based
+ * authentication with a custom authentication entry point {@link Http401UnauthorizedEntryPoint}.
+ * <p>
+ * The heart of authentication mechanism is {@link TokenProvider} providing a tokens for authenticated
+ * user and {@link com.whitesoft.pinmap.config.security.xauth.XAuthTokenFilter}, which is injected in a chain of filters.
+ *
+ * @author brzzbr
  */
 @Configuration
 @EnableWebSecurity

@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by borisbondarenko on 18.12.15.
+ *
+ * Implementation of user service. Simply retrieves data from {@link UsersRepository}.
+ *
+ * @author brzzbr
  */
 @Service
 public class UserServiceImpl implements UserService {

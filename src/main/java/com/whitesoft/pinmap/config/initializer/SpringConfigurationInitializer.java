@@ -5,6 +5,10 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 /**
  * Created by borisbondarenko on 19.12.15.
+ *
+ * Initializer for spring context. Stores a root context {@link AppConfiguration}
+ *
+ * @author brzzbr
  */
 public class SpringConfigurationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 

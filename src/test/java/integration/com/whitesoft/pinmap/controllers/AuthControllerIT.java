@@ -1,7 +1,7 @@
 package integration.com.whitesoft.pinmap.controllers;
 
-import com.whitesoft.pinmap.controllers.UserController;
-import com.whitesoft.pinmap.security.xauth.Token;
+import com.whitesoft.pinmap.controllers.AuthController;
+import com.whitesoft.pinmap.config.security.xauth.Token;
 import integration.com.whitesoft.pinmap.BaseIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,28 +11,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * Integration tests for {@link AuthController}.
+ *
+ * @author brzzbr
  */
-public class UserControllerIT extends BaseIntegrationTest{
+public class AuthControllerIT extends BaseIntegrationTest{
 
     // class to test
     @Autowired
-    protected UserController userController;
+    protected AuthController authController;
 
+    /**
+     * Tests successful authentication.
+     */
     @Test
     public void getCurrentUser(){
 
         // Act
-        Token tzarivan = userController.authorize("tzarivan", "12345");
+        Token tzarivan = authController.authorize("tzarivan", "12345");
 
         // Arrange
         assertThat(tzarivan).isNotNull();
     }
 
+    /**
+     * Tests failed authentication with incorrect password.
+     */
     @Test(expected = BadCredentialsException.class)
     public void getCurrentUserWithWrongPassword(){
 
         // Act
-        userController.authorize("tzarivan", "11111");
+        authController.authorize("tzarivan", "11111");
     }
 
 }

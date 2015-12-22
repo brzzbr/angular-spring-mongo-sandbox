@@ -1,6 +1,8 @@
-package com.whitesoft.pinmap.security.xauth;
+package com.whitesoft.pinmap.config.security.xauth;
 
 /**
+ * FROM JHIPSTER Generator. Thank you guys!
+ *
  * The security token.
  */
 public class Token {

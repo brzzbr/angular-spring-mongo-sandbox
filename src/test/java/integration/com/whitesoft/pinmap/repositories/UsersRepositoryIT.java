@@ -10,6 +10,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * Integration tests for {@link UsersRepository}.
+ *
+ * @author brzzbr
  */
 public class UsersRepositoryIT extends BaseIntegrationTest{
 
@@ -17,6 +21,9 @@ public class UsersRepositoryIT extends BaseIntegrationTest{
     @Autowired
     protected UsersRepository usersRepository;
 
+    /**
+     * Tests user's retrievement by login
+     */
     @Test
     public void findByLogin() {
 
@@ -27,6 +34,9 @@ public class UsersRepositoryIT extends BaseIntegrationTest{
         assertThat(tzarivan).isNotNull();
     }
 
+    /**
+     * Tests that there is no user with the login in a repo
+     */
     @Test
     public void findByLoginWithNullResult() {
 

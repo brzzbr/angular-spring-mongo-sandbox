@@ -8,6 +8,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * Created by borisbondarenko on 19.12.15.
+ *
+ * A spring context for SpringMVC. Simply adds a resource handler for
+ * static resources.
+ *
+ * @author brzzbr
  */
 @Configuration
 @EnableWebMvc

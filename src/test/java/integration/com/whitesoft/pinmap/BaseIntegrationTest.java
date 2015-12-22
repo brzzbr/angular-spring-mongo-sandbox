@@ -8,6 +8,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * Class of base integration test. Injects spring context.
+ *
+ * @author brzzbr
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

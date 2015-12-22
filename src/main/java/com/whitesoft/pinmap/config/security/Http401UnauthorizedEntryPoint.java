@@ -1,4 +1,4 @@
-package com.whitesoft.pinmap.security;
+package com.whitesoft.pinmap.config.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * FROM JHIPSTER Generator. Thank you guys!
+ * <p>
  * Returns a 401 error code (Unauthorized) to the client.
  */
 @Component

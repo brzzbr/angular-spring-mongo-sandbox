@@ -1,4 +1,4 @@
-package com.whitesoft.pinmap.security.xauth;
+package com.whitesoft.pinmap.config.security.xauth;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
+ * FROM JHIPSTER Generator. Thank you guys!
+ * <p>
  * Filters incoming requests and installs a Spring Security principal
  * if a header corresponding to a valid user is found.
  */

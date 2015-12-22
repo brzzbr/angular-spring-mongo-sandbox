@@ -14,6 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * Unit tests for {@link UserServiceImpl}.
+ *
+ * @author brzzbr
  */
 public class UserServiceImplTest {
 
@@ -30,6 +34,9 @@ public class UserServiceImplTest {
         ReflectionTestUtils.setField(userService, "usersRepository", usersRepository);
     }
 
+    /**
+     * Tests correct retrievement of user by login
+     */
     @Test
     public void getUser() {
 
@@ -51,6 +58,9 @@ public class UserServiceImplTest {
         softAssertions.assertAll();
     }
 
+    /**
+     * Tests null-result for incorrect login
+     */
     @Test
     public void getUserWithNullResult() {
 

@@ -1,32 +1,26 @@
 package com.whitesoft.pinmap.controllers;
 
-import com.whitesoft.pinmap.security.xauth.Token;
-import com.whitesoft.pinmap.security.xauth.TokenProvider;
-import com.whitesoft.pinmap.user.UserService;
+import com.whitesoft.pinmap.config.security.xauth.Token;
+import com.whitesoft.pinmap.config.security.xauth.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.test.annotation.Timed;
 import org.springframework.web.bind.annotation.*;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.security.Principal;
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * Created by borisbondarenko on 18.12.15.
+ *
+ * REST Controller for authentication.
+ *
+ * @author brzzbr
  */
 @RestController
 @RequestMapping("/api")
-public class UserController {
+public class AuthController {
 
     @Autowired
     protected TokenProvider tokenProvider;
@@ -37,6 +31,12 @@ public class UserController {
     @Autowired
     protected UserDetailsService userDetailsService;
 
+    /**
+     * Authentication method. Works on POST verb.
+     * @param username username
+     * @param password password
+     * @return In case of success it returns {@link Token}
+     */
     @RequestMapping(value = "/authenticate",
             method = RequestMethod.POST
     )

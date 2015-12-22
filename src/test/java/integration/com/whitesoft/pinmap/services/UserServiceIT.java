@@ -14,12 +14,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * Integration tests fo {@link UserService}.
+ *
+ * @author brzzbr
  */
 public class UserServiceIT extends BaseIntegrationTest {
 
     @Autowired
     protected UserService userService;
 
+    /**
+     * Tests successful user retrievement with correct credentials
+     * @throws NoSuchAlgorithmException
+     */
     @Test
     public void getUser() throws NoSuchAlgorithmException {
 
@@ -40,6 +48,9 @@ public class UserServiceIT extends BaseIntegrationTest {
         softAssertions.assertAll();
     }
 
+    /**
+     * Tests null result of gettin invalid user
+     */
     @Test
     public void getUserWithNullResult() {
 

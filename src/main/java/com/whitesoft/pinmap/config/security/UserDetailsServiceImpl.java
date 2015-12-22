@@ -1,4 +1,4 @@
-package com.whitesoft.pinmap.security;
+package com.whitesoft.pinmap.config.security;
 
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.user.UserRoleEnum;
@@ -14,6 +14,11 @@ import java.util.Collections;
 
 /**
  * Created by borisbondarenko on 19.12.15.
+ *
+ * Custom {@link UserDetailsService}. Retrieves data from {@link UserService}...
+ * from Mongo.
+ *
+ * @author brzzbr
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
