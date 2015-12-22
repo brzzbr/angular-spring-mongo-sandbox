@@ -1,4 +1,4 @@
-package unit.com.whitesoft.pinmap.services;
+package com.whitesoft.pinmap.tests.unit.services;
 
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.repositories.UsersRepository;
@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
-import unit.com.whitesoft.pinmap.TestDataFactory;
+import com.whitesoft.pinmap.tests.TestDataFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

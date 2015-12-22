@@ -1,4 +1,4 @@
-package unit.com.whitesoft.pinmap.security;
+package com.whitesoft.pinmap.tests.unit.security;
 
 import com.whitesoft.pinmap.config.security.xauth.Token;
 import com.whitesoft.pinmap.config.security.xauth.TokenProvider;

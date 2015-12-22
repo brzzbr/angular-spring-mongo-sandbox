@@ -1,8 +1,8 @@
-package integration.com.whitesoft.pinmap.services;
+package com.whitesoft.pinmap.tests.integration.services;
 
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.services.UserService;
-import integration.com.whitesoft.pinmap.BaseIntegrationTest;
+import com.whitesoft.pinmap.tests.integration.BaseIntegrationTest;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;

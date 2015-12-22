@@ -1,4 +1,4 @@
-package integration.com.whitesoft.pinmap;
+package com.whitesoft.pinmap.tests.integration;
 
 import com.whitesoft.pinmap.config.AppConfiguration;
 import org.junit.runner.RunWith;

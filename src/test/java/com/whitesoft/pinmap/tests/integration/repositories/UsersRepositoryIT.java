@@ -1,12 +1,13 @@
-package integration.com.whitesoft.pinmap.repositories;
+package com.whitesoft.pinmap.tests.integration.repositories;
 
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.repositories.UsersRepository;
-import integration.com.whitesoft.pinmap.BaseIntegrationTest;
+import com.whitesoft.pinmap.tests.integration.BaseIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.whitesoft.pinmap.tests.TestDataFactory.*;
 
 /**
  * Created by borisbondarenko on 21.12.15.
@@ -28,7 +29,7 @@ public class UsersRepositoryIT extends BaseIntegrationTest{
     public void findByLogin() {
 
         // Act
-        User tzarivan = usersRepository.findByLogin("tzarivan");
+        User tzarivan = usersRepository.findByLogin(getCorrectLogin());
 
         // Assert
         assertThat(tzarivan).isNotNull();
@@ -41,7 +42,7 @@ public class UsersRepositoryIT extends BaseIntegrationTest{
     public void findByLoginWithNullResult() {
 
         // Act
-        User tzarivan = usersRepository.findByLogin("qwerty");
+        User tzarivan = usersRepository.findByLogin(getWrongLogin());
 
         // Assert
         assertThat(tzarivan).isNull();

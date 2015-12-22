@@ -28,6 +28,10 @@ public class User {
     private String password;
     private Date lastLogin;
 
+    public String getId() {
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -1,8 +1,9 @@
-package integration.com.whitesoft.pinmap.controllers;
+package com.whitesoft.pinmap.tests.integration.controllers;
 
 import com.whitesoft.pinmap.controllers.AuthController;
 import com.whitesoft.pinmap.config.security.xauth.Token;
-import integration.com.whitesoft.pinmap.BaseIntegrationTest;
+import com.whitesoft.pinmap.tests.TestDataFactory;
+import com.whitesoft.pinmap.tests.integration.BaseIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -29,7 +30,7 @@ public class AuthControllerIT extends BaseIntegrationTest{
     public void getCurrentUser(){
 
         // Act
-        Token tzarivan = authController.authorize("tzarivan", "12345");
+        Token tzarivan = authController.authorize(TestDataFactory.getCorrectLogin(), TestDataFactory.getCorrectPassword());
 
         // Arrange
         assertThat(tzarivan).isNotNull();
@@ -42,7 +43,7 @@ public class AuthControllerIT extends BaseIntegrationTest{
     public void getCurrentUserWithWrongPassword(){
 
         // Act
-        authController.authorize("tzarivan", "11111");
+        authController.authorize(TestDataFactory.getCorrectLogin(), TestDataFactory.getWronPassword());
     }
 
 }
