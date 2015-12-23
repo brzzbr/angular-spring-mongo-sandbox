@@ -5,6 +5,9 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import sun.util.calendar.BaseCalendar;
+
+import java.util.Date;
 
 /**
  * Created by borisbondarenko on 22.12.15.
@@ -22,6 +25,8 @@ public class Pin {
     private String description;
 
     private GeoJsonPoint location;
+
+    private Date created;
 
     @DBRef
     @Indexed
@@ -53,5 +58,13 @@ public class Pin {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 }

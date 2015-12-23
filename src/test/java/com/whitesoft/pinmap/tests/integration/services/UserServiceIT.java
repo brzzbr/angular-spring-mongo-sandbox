@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class UserServiceIT extends BaseIntegrationTest {
 
+    // class to test
     @Autowired
     protected UserService userService;
 

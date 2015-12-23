@@ -35,7 +35,7 @@ public interface PinsRepository extends MongoRepository<Pin, String> {
      * Gets all the pins of user in particular area
      * @param user the user whom pins are going to be retrieved
      * @param polygon area to lookup
-     * @return
+     * @return pins for user in the polygon
      */
     List<Pin> findByUserAndLocationWithin(User user, Polygon polygon);
 
@@ -43,7 +43,14 @@ public interface PinsRepository extends MongoRepository<Pin, String> {
      * Gets all pins for users list in particular area
      * @param users list of users whom pins are going to be retrieved
      * @param polygon area to lookup
-     * @return
+     * @return pins for list of users in the polygon
      */
     List<Pin> findByUserInAndLocationWithin(List<User> users, Polygon polygon);
+
+    /**
+     * Deletes all the pins for user
+     * @param user user whom pins are gonna be deleted
+     * @return deleted pins3
+     */
+    List<Pin> deleteByUser(User user);
 }

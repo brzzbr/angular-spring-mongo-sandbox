@@ -27,7 +27,7 @@ public final class TestDataFactory {
         result.setFirstName("testFirstName");
         result.setLastName("testLastName");
         result.setLogin("testLogin");
-        result.setPassword("testPassword");
+        result.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
 
         return result;
     }
