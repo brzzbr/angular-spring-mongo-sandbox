@@ -1,3 +1,11 @@
-<h1>Greeting</h1>
+<div class="nav navbar-nav">
+    <div class="navbar-brand">
+        Greetings, <u>{{ctrl.firstName}}</u>!
+    </div>
 
-<button ng-click="ctrl.logout()" class="btn btn-default">Logout</button>
+    <button ng-click="ctrl.logout()" class="btn btn-default navbar-btn">Logout</button>
+</div>
+
+<ui-gmap-google-map center='map.center' zoom='map.zoom'>
+    <ui-gmap-marker ng-repeat="pin in ctrl.myPins" coords="pin.coords" idkey="pin.id"></ui-gmap-marker>
+</ui-gmap-google-map>

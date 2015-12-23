@@ -3,6 +3,7 @@ package com.whitesoft.pinmap.config;
 import com.whitesoft.pinmap.config.security.*;
 import com.whitesoft.pinmap.config.security.xauth.TokenProvider;
 import com.whitesoft.pinmap.config.security.xauth.XAuthTokenConfigurer;
+import com.whitesoft.pinmap.services.UserRoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -87,7 +88,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                     .antMatchers("/api/authenticate").permitAll()
-//                    .antMatchers("/api/activate").permitAll()
+                    .antMatchers("/api/mypins").hasAuthority(UserRoleEnum.USER.name())
 //                    .antMatchers("/api/authenticate").permitAll()
 //                    .antMatchers("/api/account/reset_password/init").permitAll()
 //                    .antMatchers("/api/account/reset_password/finish").permitAll()
