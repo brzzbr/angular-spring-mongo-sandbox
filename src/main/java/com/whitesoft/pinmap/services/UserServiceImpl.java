@@ -3,6 +3,7 @@ package com.whitesoft.pinmap.services;
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,5 +22,13 @@ public class UserServiceImpl implements UserService {
     public User getUser(String login) {
 
         return usersRepository.findByLogin(login);
+    }
+
+    @Override
+    public User getCurrentUser() {
+
+        String currentUser =
+                SecurityContextHolder.getContext().getAuthentication().getName();
+        return getUser(currentUser);
     }
 }
