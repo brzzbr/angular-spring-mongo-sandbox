@@ -1,6 +1,7 @@
 package com.whitesoft.pinmap.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -22,9 +23,14 @@ public class User {
     private String lastName;
     private String email;
 
+    @Indexed
     private String login;
     private String password;
     private Date lastLogin;
+
+    public String getId() {
+        return id;
+    }
 
     public String getFirstName() {
         return firstName;

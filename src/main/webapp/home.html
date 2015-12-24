@@ -1,3 +1,49 @@
-<h1>Greeting</h1>
+<div class="nav navbar-nav navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-brand">
+            Greetings, <u>{{ctrl.firstName}}</u>!
+        </div>
+        <button ng-click="ctrl.logout()" class="btn btn-default navbar-btn navbar-right">Logout</button>
+    </div>
+</div>
 
-<button ng-click="ctrl.logout()" class="btn btn-default">Logout</button>
+
+<ui-gmap-google-map center='ctrl.map.center' zoom='ctrl.map.zoom'>
+    <ui-gmap-window
+            show="ctrl.window.show"
+            coords="ctrl.window.model"
+            options="ctrl.window.options"
+            closeClick="ctrl.window.closeClick()">
+        <div style="width: 300px">
+            <div style="color: black">
+                <span style="font-weight: bold">{{ctrl.window.title}}</span>
+                pinned by <span style="font-weight: bold">{{ctrl.window.userName}}</span>
+                // <span class="date-cell">{{ctrl.window.created}}</span>
+            </div>
+            <div style="color: darkgray; word-wrap: break-word">
+                {{ctrl.window.description}}
+            </div>
+        </div>
+        <!--<div style="color: darkred">-->
+        <!--{{ctrl.window.description}}-->
+        <!--</div>-->
+    </ui-gmap-window>
+
+    <ui-gmap-markers
+            models="ctrl.myPins"
+            idkey="ctrl.myPins.id"
+            coords="'self'"
+            options="'options'"
+            events="ctrl.markerEvents">
+    </ui-gmap-markers>
+</ui-gmap-google-map>
+
+<footer class="footer">
+    <div class="container">
+        <p>
+
+        <p class="text-muted">
+            <a target="_blank" href="https://github.com/BorizZebr/angular-spring-mongo-sandbox">GitHub</a>
+        </p>
+    </div>
+</footer>

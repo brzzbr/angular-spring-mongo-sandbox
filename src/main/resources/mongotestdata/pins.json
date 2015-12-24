@@ -1,0 +1,72 @@
+{
+  "_id" : ObjectId("567a8223c300e960ed04c71c"),
+  "_class" : "com.whitesoft.pinmap.domain.Pin",
+  "description" : "testPin-1",
+  "location" : { "type" : "Point" , "coordinates" : [ -163.341718368527 , 58.979056611115]},
+  "created" : {$date:"2013-11-20T23:32:18Z"},
+  "user" : { "$ref" : "users", "$id" : "567a8223c300e960ed04c71b" }
+},
+{
+"_id" : ObjectId("567a8223c300e960ed04c71d"),
+"_class" : "com.whitesoft.pinmap.domain.Pin",
+"description" : "testPin-2",
+"location" : { "type" : "Point" , "coordinates" : [ -139.71654875834193 , -1.284906816104069]},
+"created" : {$date:"2013-11-25T23:32:18Z"},
+"user" : { "$ref" : "users", "$id" : "567a8223c300e960ed04c71b" }
+},
+{
+"_id" : ObjectId("567a8223c300e960ed04c71e"),
+"_class" : "com.whitesoft.pinmap.domain.Pin",
+"description" : "testPin-3",
+"location" : { "type" : "Point" , "coordinates" : [ 33.65962669212195 , -87.27739778850307]},
+"created" : {$date:"2014-11-20T23:32:18Z"},
+"user" : { "$ref" : "users", "$id" : "567a8223c300e960ed04c71b" }
+},
+{
+"_id" : ObjectId("567a8223c300e960ed04c71f"),
+"_class" : "com.whitesoft.pinmap.domain.Pin",
+"description" : "testPin-4",
+"location" : { "type" : "Point" , "coordinates" : [ 8.776460088647042 , 34.05230739727284]},
+"created" : {$date:"2015-02-13T23:32:18Z"},
+"user" : { "$ref" : "users", "$id" : "567a8223c300e960ed04c71b" }
+},
+{
+"_id" : ObjectId("567a8223c300e960ed04c720"),
+"_class" : "com.whitesoft.pinmap.domain.Pin",
+"description" : "testPin-5",
+"location" : { "type" : "Point" , "coordinates" : [ -55.37909116752343 , 28.046531409558185]},
+"created" : {$date:"2014-03-10T23:32:18Z"},
+"user" : { "$ref" : "users", "$id" : "567a8223c300e960ed04c71b" }
+},
+{
+"_id" : ObjectId("211111111111111111111116"),
+"_class" : "com.whitesoft.pinmap.domain.Pin",
+"description" : "testPin-6",
+"location" : { "type" : "Point" , "coordinates" : [ 133.98993214620953 , -17.612796956109392]},
+"created" : {$date:"2014-09-10T23:32:18Z"},
+"user" : { "$ref" : "users", "$id" : "111111111111111111111112" }
+},
+{
+"_id" : ObjectId("211111111111111111111117"),
+"_class" : "com.whitesoft.pinmap.domain.Pin",
+"description" : "testPin-7",
+"location" : { "type" : "Point" , "coordinates" : [ -171.0439395038345 , -17.049799811339597]},
+"created" : {$date:"2014-11-10T23:32:18Z"},
+"user" : { "$ref" : "users", "$id" : "111111111111111111111112" }
+},
+{
+"_id" : ObjectId("211111111111111111111118"),
+"_class" : "com.whitesoft.pinmap.domain.Pin",
+"description" : "testPin-8",
+"location" : { "type" : "Point" , "coordinates" : [ -108.56803032130665 , 36.883067827456614]},
+"created" : {$date:"2014-05-11T23:32:18Z"},
+"user" : { "$ref" : "users", "$id" : "111111111111111111111112" }
+},
+{
+"_id" : ObjectId("211111111111111111111119"),
+"_class" : "com.whitesoft.pinmap.domain.Pin",
+"description" : "testPin-9",
+"location" : { "type" : "Point" , "coordinates" : [ 171.38492559118833 , -32.869736261757886]},
+"created" : {$date:"2014-05-05T23:32:18Z"},
+"user" : { "$ref" : "users", "$id" : "111111111111111111111113" }
+}

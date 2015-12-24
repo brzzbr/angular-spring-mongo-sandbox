@@ -1,5 +1,6 @@
 {
-  "_id" : ObjectId("111111111111111111111111"),
+  "_id" : ObjectId("567a8223c300e960ed04c71b"),
+  "_class" : "com.whitesoft.pinmap.domain.User",
   "login" : "tzarivan",
   "email" : "tzarivan@kremlin.com",
   "firstName" : "Ivan",
@@ -9,6 +10,7 @@
 },
 {
   "_id" : ObjectId("111111111111111111111112"),
+  "_class" : "com.whitesoft.pinmap.domain.User",
   "login" : "johndoe",
   "email" : "johndoe@gmail.com",
   "firstName" : "John",
@@ -18,6 +20,7 @@
 },
 {
   "_id" : ObjectId("111111111111111111111113"),
+  "_class" : "com.whitesoft.pinmap.domain.User",
   "login" : "kermit",
   "email" : "kermit@gmail.com",
   "firstName" : "Kermit",

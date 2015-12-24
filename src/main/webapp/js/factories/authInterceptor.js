@@ -23,11 +23,11 @@
             return {
                 responseError: function (response) {
                     // token has expired
-                    if (response.status === 401 && (response.data.error == 'invalid_token' || response.data.error == 'Unauthorized')) {
+                    if (response.status === 401 && (response.data.error == 'Alarm! Access Denied!')) {
                         localStorageService.remove('token');
 
-                        var authService = $injector.get('authService');
-                        authService.authorize();
+                        var navigationService = $injector.get('navigationService');
+                        navigationService.goToLoginState();
 
                         return $q.reject(response);
                     }

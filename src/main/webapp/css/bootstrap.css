@@ -4373,6 +4373,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-nav {
   margin: 9.75px -15px;
+  background-color: #3498db;
+  width: 100%;
+  color: white;
 }
 .navbar-nav > li > a {
   padding-top: 10px;

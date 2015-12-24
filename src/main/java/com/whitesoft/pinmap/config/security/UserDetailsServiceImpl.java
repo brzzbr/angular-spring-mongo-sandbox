@@ -1,8 +1,8 @@
 package com.whitesoft.pinmap.config.security;
 
 import com.whitesoft.pinmap.domain.User;
-import com.whitesoft.pinmap.user.UserRoleEnum;
-import com.whitesoft.pinmap.user.UserService;
+import com.whitesoft.pinmap.services.UserRoleEnum;
+import com.whitesoft.pinmap.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

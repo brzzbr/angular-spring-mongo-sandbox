@@ -101,6 +101,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>${version.jackson}</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.5</version>
+        </dependency>
 
         <!-- testing tools -->
         <dependency>
@@ -118,7 +123,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>2.1.0</version>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -135,6 +140,11 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>1.4.7</version>
         </dependency>
 
 
@@ -159,17 +169,6 @@
             <version>3.0.0</version>
         </dependency>
 
-        <!-- angular stuff -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>angularjs</artifactId>
-            <version>1.3.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>3.2.0</version>
-        </dependency>
     </dependencies>
 
 
@@ -300,24 +299,28 @@
                                 </configuration>
                             </execution>
 
-                            <execution>
-                                <id>mongo-import</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>mongo-import</goal>
-                                </goals>
-                                <configuration>
-                                    <version>${version.mongo}</version>
-                                    <defaultImportDatabase>local</defaultImportDatabase>
-                                    <imports>
-                                        <import>
-                                            <collection>users</collection>
-                                            <file>${project.basedir}/src/main/resources/mongotestdata/users.json</file>
-                                            <dropOnImport>true</dropOnImport>
-                                        </import>
-                                    </imports>
-                                </configuration>
-                            </execution>
+                            <!--Doesn't work with related DFRef data!!-->
+                            <!--<execution>-->
+                                <!--<id>mongo-import</id>-->
+                                <!--<phase>pre-integration-test</phase>-->
+                                <!--<goals>-->
+                                    <!--<goal>mongo-import</goal>-->
+                                <!--</goals>-->
+                                <!--<configuration>-->
+                                    <!--<version>${version.mongo}</version>-->
+                                    <!--<defaultImportDatabase>local</defaultImportDatabase>-->
+                                    <!--<imports>-->
+                                        <!--<import>-->
+                                            <!--<collection>users</collection>-->
+                                            <!--<file>${project.basedir}/src/main/resources/mongotestdata/users.json</file>-->
+                                        <!--</import>-->
+                                        <!--<import>-->
+                                            <!--<collection>pins</collection>-->
+                                            <!--<file>${project.basedir}/src/main/resources/mongotestdata/pins.json</file>-->
+                                        <!--</import>-->
+                                    <!--</imports>-->
+                                <!--</configuration>-->
+                            <!--</execution>-->
 
                             <execution>
                                 <id>stop</id>
