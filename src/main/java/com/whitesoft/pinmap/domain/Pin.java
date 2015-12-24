@@ -22,6 +22,8 @@ public class Pin {
     @Id
     private String id;
 
+    private String name;
+
     private String description;
 
     private GeoJsonPoint location;
@@ -34,6 +36,10 @@ public class Pin {
 
     public String getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getDescription() {
@@ -66,5 +72,9 @@ public class Pin {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

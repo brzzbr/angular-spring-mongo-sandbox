@@ -88,7 +88,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                     .antMatchers("/api/authenticate").permitAll()
-                    .antMatchers("/api/mypins").hasAuthority(UserRoleEnum.USER.name())
+                    .antMatchers("/api/mypins").hasAuthority(UserRoleEnum.USER.name() )
 //                    .antMatchers("/api/authenticate").permitAll()
 //                    .antMatchers("/api/account/reset_password/init").permitAll()
 //                    .antMatchers("/api/account/reset_password/finish").permitAll()

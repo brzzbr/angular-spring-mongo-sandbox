@@ -36,7 +36,9 @@ public class PinController {
         return new PinsCollectionDTO(pinService.getMyPins().stream()
                 .map(pin -> new PinDTO(
                         pin.getId(),
+                        pin.getName(),
                         pin.getDescription(),
+                        "me",
                         pin.getLocation(),
                         pin.getCreated()))
                 .collect(Collectors.toList()));
