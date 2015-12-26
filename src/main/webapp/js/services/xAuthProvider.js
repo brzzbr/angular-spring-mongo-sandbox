@@ -26,6 +26,7 @@
                 }
             }).success(function (response) {
                 localStorageService.set('token', response);
+                localStorageService.set('currentUser', response.token.split(':')[0]);
                 localStorageService.set('isAuthorized', true);
                 return response;
             });

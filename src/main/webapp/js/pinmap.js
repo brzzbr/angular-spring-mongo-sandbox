@@ -2,7 +2,7 @@
  * Created by borisbondarenko on 21.12.15.
  */
 
-angular.module('pinmap', ['LocalStorageModule', 'ui.router', 'uiGmapgoogle-maps'])
+angular.module('pinmap', ['LocalStorageModule', 'ui.router', 'uiGmapgoogle-maps', 'ngResource'])
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
         $stateProvider

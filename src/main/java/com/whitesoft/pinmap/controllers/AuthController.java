@@ -37,7 +37,8 @@ public class AuthController {
      * @param password password
      * @return In case of success it returns {@link Token}
      */
-    @RequestMapping(value = "/authenticate",
+    @RequestMapping(
+            value = "/authenticate",
             method = RequestMethod.POST
     )
     public Token authorize(@RequestParam String username, @RequestParam String password) {

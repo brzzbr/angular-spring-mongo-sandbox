@@ -4,14 +4,14 @@
 (function () {
 
     angular.module('pinmap')
-        .controller('homeCtrl', ['authService', 'pinService', homeCtrl]);
+        .controller('homeCtrl', ['authService', 'pinService', 'userService', homeCtrl]);
 
-    function homeCtrl(authService, pinService) {
+    function homeCtrl(authService, pinService, userService) {
 
         var thisCtrl = this;
 
         // user firstName
-        thisCtrl.firstName = 'stab stab stab';
+        thisCtrl.firstName = '';
         // adds GoogleMap
         thisCtrl.map = {};
         // pin info window
@@ -36,17 +36,35 @@
             thisCtrl.window = {
                 marker: {},
                 show: false,
-                closeClick: function() {
+                closeClick: function () {
                     this.show = false;
                 },
                 options: {},
                 title: ''
             };
 
-            pinService.getMyPins()
-                .success(function (response) {
+            thisCtrl.markerEvents = {
+                click: function (marker, eventName, model) {
+                    thisCtrl.window.model = model;
+                    thisCtrl.window.title = model.name;
+                    thisCtrl.window.description = model.description;
+                    thisCtrl.window.userName = model.userName;
+                    thisCtrl.window.created = model.created;
+                    thisCtrl.window.show = true;
+                }
+            };
 
-                    response.items.forEach(function (pin) {
+            userService.getCurrentUser()
+                .then(function (result) {
+
+                    thisCtrl.firstName = result.fullName;
+                });
+
+
+            pinService.getMyPins()
+                .then(function (response) {
+
+                    response.data.items.forEach(function (pin) {
                         thisCtrl.myPins.push({
                             id: pin.id,
                             latitude: pin.location.y,
@@ -63,21 +81,7 @@
                             }
                         });
                     });
-                })
-                .error(function (error) {
-
                 });
-
-            thisCtrl.markerEvents = {
-                click: function(marker, eventName, model) {
-                    thisCtrl.window.model = model;
-                    thisCtrl.window.title = model.name;
-                    thisCtrl.window.description = model.description;
-                    thisCtrl.window.userName = model.userName;
-                    thisCtrl.window.created = model.created;
-                    thisCtrl.window.show = true;
-                }
-            }
         }
 
         function logout() {

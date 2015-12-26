@@ -28,7 +28,8 @@ public class PinController {
      * Gets pins for current authenticated user
      * @return collection of current user's pins
      */
-    @RequestMapping(value = "/mypins",
+    @RequestMapping(
+            value = "/mypins",
             method = RequestMethod.GET
     )
     public PinsCollectionDTO getMyPins(){
