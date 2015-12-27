@@ -25,7 +25,8 @@
         function addPin(pin) {
             return pinResource.save(pin).$promise
                 .then(function (result) {
-                    return result;
+
+                    console.log("azaza");
                 });
         }
     }

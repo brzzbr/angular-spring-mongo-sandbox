@@ -104,7 +104,21 @@
                 .then(function (response) {
 
                     response.items.forEach(function (pin) {
-                        thisCtrl.myPins.push(pinDtoToPin(pin));
+                        thisCtrl.myPins.push({
+                            id: pin.id,
+                            latitude: pin.location.y,
+                            longitude: pin.location.x,
+                            name: pin.name,
+                            description: pin.description,
+                            userName: pin.userName,
+                            created: dateFormat(new Date(pin.created), "default"),
+                            options: {
+                                labelContent: pin.name,
+                                labelAnchor: '0 0',
+                                labelVisible: true,
+                                labelClass: 'marker-label'
+                            }
+                        });
                     });
                 });
         }
@@ -117,43 +131,16 @@
         function addNewPin() {
 
             var pin = {
-                description: thisCtrl.addPin.pinDescription,
-                name: thisCtrl.addPin.pinTitle,
+                description: thisCtrl.addPin.pinTitle,
+                name: thisCtrl.addPin.pinDescription,
                 location: {
                     "x": thisCtrl.addPin.model.longitude,
-                    "y": thisCtrl.addPin.model.latitude
+                    "y": thisCtrl.addPin.model.latitude,
                 }
             };
 
-            pinService.addPin(pin)
-                .then(function (result) {
-
-                    thisCtrl.myPins.push(pinDtoToPin(result));
-                });
+            pinService.addPin(pin);
             thisCtrl.addPin.show = false;
-        }
-
-        /**
-         * function for conversion pin from server to stored pin
-         * @param pin
-         */
-        function pinDtoToPin(pin) {
-
-            return {
-                id: pin.id,
-                latitude: pin.location.y,
-                longitude: pin.location.x,
-                name: pin.name,
-                description: pin.description,
-                userName: pin.userName,
-                created: dateFormat(new Date(pin.created), "default"),
-                options: {
-                    labelContent: pin.name,
-                    labelAnchor: '0 0',
-                    labelVisible: true,
-                    labelClass: 'marker-label'
-                }
-            };
         }
     }
 
