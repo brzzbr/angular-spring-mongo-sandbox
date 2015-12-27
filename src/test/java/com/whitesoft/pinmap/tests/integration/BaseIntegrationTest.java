@@ -50,8 +50,8 @@ public abstract class BaseIntegrationTest {
         token = null;
     }
 
-    protected <T extends HttpRequest> HttpRequest setAuthHeader(T request) {
+    protected <T extends HttpRequest> T setAuthHeader(T request) {
 
-        return request.header("x-auth-token", token);
+        return (T)request.header("x-auth-token", token);
     }
 }
