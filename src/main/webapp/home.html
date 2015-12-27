@@ -8,25 +8,34 @@
 </div>
 
 
-<ui-gmap-google-map center='ctrl.map.center' zoom='ctrl.map.zoom'>
+<ui-gmap-google-map
+        center='ctrl.map.center'
+        zoom='ctrl.map.zoom'
+        events='ctrl.map.mapEvents'
+        options='ctrl.map.options'>
     <ui-gmap-window
-            show="ctrl.window.show"
-            coords="ctrl.window.model"
-            options="ctrl.window.options"
-            closeClick="ctrl.window.closeClick()">
+            show="ctrl.pinInfo.show"
+            coords="ctrl.pinInfo.model"
+            options="ctrl.pinInfo.options"
+            closeClick="ctrl.pinInfo.closeClick()">
         <div style="width: 300px">
             <div style="color: black">
-                <span style="font-weight: bold">{{ctrl.window.title}}</span>
-                pinned by <span style="font-weight: bold">{{ctrl.window.userName}}</span>
-                // <span class="date-cell">{{ctrl.window.created}}</span>
+                <span style="font-weight: bold">{{ctrl.pinInfo.title}}</span>
+                pinned by <span style="font-weight: bold">{{ctrl.pinInfo.userName}}</span>
+                // <span class="date-cell">{{ctrl.pinInfo.created}}</span>
             </div>
             <div style="color: darkgray; word-wrap: break-word">
-                {{ctrl.window.description}}
+                {{ctrl.pinInfo.description}}
             </div>
         </div>
-        <!--<div style="color: darkred">-->
-        <!--{{ctrl.window.description}}-->
-        <!--</div>-->
+    </ui-gmap-window>
+
+    <ui-gmap-window
+            show="ctrl.addPin.show"
+            coords="ctrl.addPin.model"
+            options="ctrl.addPin.options"
+            closeClick="ctrl.addPin.closeClick()">
+        AZAZA!!!
     </ui-gmap-window>
 
     <ui-gmap-markers
