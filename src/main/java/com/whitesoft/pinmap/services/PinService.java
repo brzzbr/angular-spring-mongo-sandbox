@@ -20,4 +20,11 @@ public interface PinService {
      * @return collection of user's pin
      */
     List<Pin> getMyPins();
+
+    /**
+     * Submits new pin for current user
+     * @param pin pin do add
+     * @return returns posted pin
+     */
+    Pin addMyPin(Pin pin);
 }

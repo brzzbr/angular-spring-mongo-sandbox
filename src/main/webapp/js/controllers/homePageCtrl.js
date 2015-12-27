@@ -25,6 +25,8 @@
 
         // logout method
         thisCtrl.logout = logout;
+        // add new pin method
+        thisCtrl.addNewPin = addNewPin;
 
         initModel();
         function initModel() {
@@ -42,11 +44,12 @@
                     dblclick: function (mapModel, eventName, args) {
 
                         var latLng = args[0].latLng;
-
                         thisCtrl.addPin.model = {
                             latitude: latLng.lat(),
                             longitude: latLng.lng()
                         };
+                        thisCtrl.addPin.pinTitle = 'Azaza title!';
+                        thisCtrl.addPin.pinDescription = '';
                         thisCtrl.addPin.show = true;
                         // from documentation: scope apply required because
                         // this event handler is outside of the angular domain
@@ -72,7 +75,9 @@
                     this.show = false
                 },
                 options: {},
-                title: 'Add new pin!'
+                title: 'Add new pin!',
+                pinTitle: '',
+                pinDescription: ''
             };
 
             // instance of pin event handler
@@ -98,7 +103,7 @@
             pinService.getMyPins()
                 .then(function (response) {
 
-                    response.data.items.forEach(function (pin) {
+                    response.items.forEach(function (pin) {
                         thisCtrl.myPins.push({
                             id: pin.id,
                             latitude: pin.location.y,
@@ -121,6 +126,21 @@
         function logout() {
 
             authService.logout();
+        }
+
+        function addNewPin() {
+
+            var pin = {
+                description: thisCtrl.addPin.pinTitle,
+                name: thisCtrl.addPin.pinDescription,
+                location: {
+                    "x": thisCtrl.addPin.model.longitude,
+                    "y": thisCtrl.addPin.model.latitude,
+                }
+            };
+
+            pinService.addPin(pin);
+            thisCtrl.addPin.show = false;
         }
     }
 

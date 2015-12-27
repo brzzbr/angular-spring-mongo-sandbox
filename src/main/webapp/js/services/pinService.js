@@ -4,16 +4,30 @@
 (function () {
 
     angular.module('pinmap')
-        .service('pinService', ['$http', pinService]);
+        .service('pinService', ['$http', '$resource', pinService]);
 
-    function pinService($http) {
+    function pinService($http, $resource) {
+
+        var pinResource = $resource('/api/mypins');
 
         return {
-            getMyPins: getMyPins
+            getMyPins: getMyPins,
+            addPin: addPin
         };
 
         function getMyPins() {
-            return $http.get('/api/mypins');
+            return pinResource.get().$promise
+                .then(function (pins) {
+                    return pins;
+                });
+        }
+
+        function addPin(pin) {
+            return pinResource.save(pin).$promise
+                .then(function (result) {
+
+                    console.log("azaza");
+                });
         }
     }
 })();

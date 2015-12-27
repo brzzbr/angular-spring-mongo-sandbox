@@ -7,7 +7,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.HttpRequest;
 import com.whitesoft.pinmap.config.AppConfiguration;
-import com.whitesoft.pinmap.tests.TestGsonFactory;
+import com.whitesoft.pinmap.config.serialization.GSONFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -31,7 +31,7 @@ public abstract class BaseIntegrationTest {
 
     private String token;
 
-    protected static Gson gson = TestGsonFactory.getGson();
+    protected static Gson gson = GSONFactory.getGson();
 
     @Before
     public void loginTestUser() throws UnirestException {

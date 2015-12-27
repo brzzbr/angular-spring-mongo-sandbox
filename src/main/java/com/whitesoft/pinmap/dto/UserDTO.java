@@ -33,6 +33,9 @@ public class UserDTO {
         return email;
     }
 
+    public UserDTO() {
+    }
+
     public UserDTO(String firstName, String lastName, String fullName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;

@@ -17,7 +17,7 @@ public class XAuthConfiguration {
     @Bean
     public TokenProvider tokenProvider() {
         String secret = "myXAuthSecret";
-        int validityInSeconds = 1800;
+        int validityInSeconds = 18000;
         return new TokenProvider(secret, validityInSeconds);
     }
 }

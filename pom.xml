@@ -14,7 +14,6 @@
         <version.spring>4.2.4.RELEASE</version.spring>
         <version.springsecurity>4.0.3.RELEASE</version.springsecurity>
         <version.spring.mongodb>1.8.2.RELEASE</version.spring.mongodb>
-        <version.jackson>2.6.1</version.jackson>
         <version.jetty>9.3.6.v20151106</version.jetty>
         <version.embedmongo.plugin>0.3.2</version.embedmongo.plugin>
         <version.mongo>2.6.1</version.mongo>
@@ -86,21 +85,6 @@
         </dependency>
 
         <!-- JSON Serializer for Spring MVC -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${version.jackson}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${version.jackson}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${version.jackson}</version>
-        </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

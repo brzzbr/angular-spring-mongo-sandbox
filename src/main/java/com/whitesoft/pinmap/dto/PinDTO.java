@@ -49,6 +49,9 @@ public class PinDTO {
         return created;
     }
 
+    public PinDTO() {
+    }
+
     public PinDTO(String id, String name, String description, String userName, GeoJsonPoint location, Date created) {
         this.id = id;
         this.name = name;

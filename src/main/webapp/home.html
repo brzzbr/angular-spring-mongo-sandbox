@@ -35,7 +35,25 @@
             coords="ctrl.addPin.model"
             options="ctrl.addPin.options"
             closeClick="ctrl.addPin.closeClick()">
-        AZAZA!!!
+
+        <form role="form" ng-submit="$parent.ctrl.addNewPin()">
+            <div style="margin-bottom: 10px" class="input-group">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Pin name"
+                       ng-model="$parent.ctrl.addPin.pinTitle"
+                       required>
+            </div>
+            <div style="margin-bottom: 10px" class="input-group">
+                <textarea class="form-control"
+                          rows="3"
+                          placeholder="Pin description"
+                          ng-model="$parent.ctrl.addPin.pinDescription"
+                          required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success btn-sm">Submit</button>
+        </form>
+
     </ui-gmap-window>
 
     <ui-gmap-markers
@@ -56,3 +74,4 @@
         </p>
     </div>
 </footer>
+

@@ -24,7 +24,7 @@
         function getUser(username) {
 
             return userResource.get({id: username}).$promise
-                .then(function(user){
+                .then(function (user) {
                     return user;
                 });
         }
