@@ -1,8 +1,10 @@
 package com.whitesoft.pinmap.population;
 
 import com.whitesoft.pinmap.domain.Pin;
+import com.whitesoft.pinmap.domain.Sub;
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.repositories.PinsRepository;
+import com.whitesoft.pinmap.repositories.SubsRepository;
 import com.whitesoft.pinmap.repositories.UsersRepository;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class RepositoryPopulator implements InitializingBean {
 
     @Autowired
     private PinsRepository pinsRepository;
+
+    @Autowired
+    private SubsRepository subsRepository;
 
     private String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " +
             "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco " +
@@ -141,5 +146,28 @@ public class RepositoryPopulator implements InitializingBean {
         pin_3_1.setCreated(new Date());
         pin_3_1.setUser(user_3);
         pinsRepository.insert(pin_3_1);
+
+        // user tzarivan is subscribed on johndoe
+        Sub user_1_sub_2 = new Sub();
+        user_1_sub_2.setAuthor(user_2);
+        user_1_sub_2.setSubscriber(user_1);
+        user_1_sub_2.setSince(new Date());
+        user_1_sub_2.setActive(true);
+        subsRepository.insert(user_1_sub_2);
+
+        // user johndoe is subscribed on tzarivan and kermitthefrog
+        Sub user_2_sub_1 = new Sub();
+        user_2_sub_1.setAuthor(user_1);
+        user_2_sub_1.setSubscriber(user_2);
+        user_2_sub_1.setSince(new Date());
+        user_2_sub_1.setActive(true);
+        subsRepository.insert(user_2_sub_1);
+
+        Sub user_2_sub_3 = new Sub();
+        user_2_sub_3.setAuthor(user_3);
+        user_2_sub_3.setSubscriber(user_2);
+        user_2_sub_3.setSince(new Date());
+        user_2_sub_3.setActive(true);
+        subsRepository.insert(user_2_sub_3);
     }
 }

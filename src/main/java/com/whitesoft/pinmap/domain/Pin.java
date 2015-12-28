@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import sun.util.calendar.BaseCalendar;
 
 import java.util.Date;
 
@@ -26,8 +25,10 @@ public class Pin {
 
     private String description;
 
+    @Indexed
     private GeoJsonPoint location;
 
+    @Indexed
     private Date created;
 
     @DBRef
