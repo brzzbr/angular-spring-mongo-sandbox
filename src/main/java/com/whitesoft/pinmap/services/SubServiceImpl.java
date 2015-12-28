@@ -2,6 +2,8 @@ package com.whitesoft.pinmap.services;
 
 import com.whitesoft.pinmap.domain.Sub;
 import com.whitesoft.pinmap.domain.User;
+import com.whitesoft.pinmap.repositories.SubsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +19,12 @@ import java.util.List;
 @Service
 public class SubServiceImpl implements SubService {
 
+    @Autowired
+    protected SubsRepository subsRepository;
+
     @Override
     public List<Sub> getSubs(User user) {
-        return null;
+
+        return subsRepository.findBySubscriber(user);
     }
 }

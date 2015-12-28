@@ -17,7 +17,7 @@ public interface SubService {
 
     /**
      * Gets all subscriptions for current user
-     * @return
+     * @return a list of user"s subscriptions
      */
     List<Sub> getSubs(User user);
 }

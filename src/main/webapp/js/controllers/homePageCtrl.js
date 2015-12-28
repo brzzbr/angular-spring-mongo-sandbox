@@ -11,7 +11,7 @@
         var thisCtrl = this;
 
         // user firstName
-        thisCtrl.firstName = '';
+        thisCtrl.username = '';
         // adds GoogleMap
         thisCtrl.map = {};
         // pin info window
@@ -96,7 +96,7 @@
             userService.getCurrentUser()
                 .then(function (result) {
 
-                    thisCtrl.firstName = result.fullName;
+                    thisCtrl.username = result.username;
                 });
 
             // gets pins for current user
@@ -151,7 +151,8 @@
                     labelContent: pin.name,
                     labelAnchor: '0 0',
                     labelVisible: true,
-                    labelClass: 'marker-label'
+                    labelClass: 'marker-label',
+                    icon: pin.username === thisCtrl.username ? 'img/greendot.png' : 'img/bluedot.png'
                 }
             };
         }

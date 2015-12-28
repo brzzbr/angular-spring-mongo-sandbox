@@ -4,6 +4,7 @@ import com.whitesoft.pinmap.domain.Pin;
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.repositories.PinsRepository;
 import com.whitesoft.pinmap.services.PinServiceImpl;
+import com.whitesoft.pinmap.services.SubService;
 import com.whitesoft.pinmap.services.UserService;
 import com.whitesoft.pinmap.services.exceptions.InvalidPinException;
 import org.assertj.core.api.SoftAssertions;
@@ -13,6 +14,7 @@ import org.mockito.Mockito;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.whitesoft.pinmap.tests.TestDataFactory.getTestPins;
@@ -31,17 +33,18 @@ public class PinServiceImplTest {
     protected PinServiceImpl pinService = new PinServiceImpl();
 
     // dependencies
-    protected UserService userService;
-
     protected PinsRepository pinsRepository;
+
+    protected SubService subService;
 
     @Before
     public void setup() {
 
-        userService = Mockito.mock(UserService.class);
         pinsRepository = Mockito.mock(PinsRepository.class);
-        ReflectionTestUtils.setField(pinService, "userService", userService);
         ReflectionTestUtils.setField(pinService, "pinsRepository", pinsRepository);
+
+        subService = Mockito.mock(SubService.class);
+        ReflectionTestUtils.setField(pinService, "subService", subService);
     }
 
     /**
@@ -54,7 +57,8 @@ public class PinServiceImplTest {
         // Arrange
         User user = getValidTestUser();
         List<Pin> pins = getTestPins();
-        Mockito.when(pinsRepository.findByUser(user)).thenReturn(pins);
+        Mockito.when(pinsRepository.findByUserIn(Collections.singletonList(user))).thenReturn(pins);
+        Mockito.when(subService.getSubs(user)).thenReturn(Collections.emptyList());
 
         // Act
         List<Pin> myPins = pinService.getPins(user);
