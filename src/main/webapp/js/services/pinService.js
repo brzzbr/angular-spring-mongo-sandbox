@@ -4,9 +4,9 @@
 (function () {
 
     angular.module('pinmap')
-        .service('pinService', ['$http', '$resource', pinService]);
+        .service('pinService', ['$resource', pinService]);
 
-    function pinService($http, $resource) {
+    function pinService($resource) {
 
         var pinResource = $resource('/api/pins');
 

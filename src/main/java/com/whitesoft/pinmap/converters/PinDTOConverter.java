@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @author brzzbr
  */
 @Service
-public class PinToPinDTOConverter implements Converter<Pin, PinDTO> {
+public class PinDTOConverter implements Converter<Pin, PinDTO> {
 
     @Override
     public PinDTO convert(Pin fromObj) {

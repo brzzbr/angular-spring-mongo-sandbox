@@ -10,7 +10,7 @@ import com.whitesoft.pinmap.controllers.PinController;
 import com.whitesoft.pinmap.domain.Pin;
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.dto.PinDTO;
-import com.whitesoft.pinmap.dto.PinsCollectionDTO;
+import com.whitesoft.pinmap.dto.CollectionDTO;
 import com.whitesoft.pinmap.repositories.PinsRepository;
 import com.whitesoft.pinmap.services.UserService;
 import com.whitesoft.pinmap.tests.integration.BaseIntegrationTest;
@@ -57,7 +57,7 @@ public class PinControllerIT extends BaseIntegrationTest {
         HttpResponse<String> response = setAuthHeader(Unirest.get(getTestApiUrl() + "/pins")).asString();
 
         // Assert
-        PinsCollectionDTO pins = gson.fromJson(response.getBody(), PinsCollectionDTO.class);
+        CollectionDTO pins = gson.fromJson(response.getBody(), CollectionDTO.class);
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(pins).isNotNull();
         softAssertions.assertThat(pins.getItems().size()).isEqualTo(pinsFromBase.size());

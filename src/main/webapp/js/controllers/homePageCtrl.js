@@ -20,6 +20,8 @@
         thisCtrl.addPin = {};
         // my pins
         thisCtrl.myPins = [];
+        // my subscriptions
+        thisCtrl.mySubs = [];
         // pin events (like click) handler
         thisCtrl.markerEvents = {};
 

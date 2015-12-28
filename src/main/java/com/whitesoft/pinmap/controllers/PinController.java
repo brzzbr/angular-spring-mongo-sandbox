@@ -1,10 +1,10 @@
 package com.whitesoft.pinmap.controllers;
 
-import com.whitesoft.pinmap.converters.PinToPinDTOConverter;
+import com.whitesoft.pinmap.converters.PinDTOConverter;
 import com.whitesoft.pinmap.domain.Pin;
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.dto.PinDTO;
-import com.whitesoft.pinmap.dto.PinsCollectionDTO;
+import com.whitesoft.pinmap.dto.CollectionDTO;
 import com.whitesoft.pinmap.services.PinService;
 import com.whitesoft.pinmap.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class PinController {
     protected PinService pinService;
 
     @Autowired
-    protected PinToPinDTOConverter converter;
+    protected PinDTOConverter converter;
 
     /**
      * Gets pins for current authenticated user
@@ -44,10 +44,10 @@ public class PinController {
             value = "/pins",
             method = RequestMethod.GET
     )
-    public PinsCollectionDTO getPins(){
+    public CollectionDTO<PinDTO> getPins(){
 
         User user = userService.getCurrentUser();
-        return new PinsCollectionDTO(pinService.getPins(user).stream()
+        return new CollectionDTO<>(pinService.getPins(user).stream()
                 .map(converter::convert)
                 .collect(Collectors.toList()));
     }

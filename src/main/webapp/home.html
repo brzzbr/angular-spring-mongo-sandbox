@@ -1,8 +1,23 @@
-<div class="nav navbar-nav navbar-fixed-top">
+<div class="nav navbar-nav navbar-fixed-top navbar-default">
     <div class="container">
         <div class="navbar-brand">
             Greetings, <u>{{ctrl.username}}</u>!
         </div>
+
+        <div class="btn-group navbar-btn">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-globe"></span>
+                Your subscriptions
+                <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu" style="padding:17px;">
+
+                <div ng-repeat="sub in ctrl.mySubs" class="row">
+                    {{sub.username}} <button>Unsubscribe</button>
+                </div>
+            </div>
+        </div>
+
         <button ng-click="ctrl.logout()" class="btn btn-default navbar-btn navbar-right">Logout</button>
     </div>
 </div>
