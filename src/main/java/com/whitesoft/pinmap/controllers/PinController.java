@@ -36,7 +36,7 @@ public class PinController {
      * @return collection of current user's pins with pins of subscription-users
      */
     @RequestMapping(
-            value = "/mypins",
+            value = "/pins",
             method = RequestMethod.GET
     )
     public PinsCollectionDTO getPins(){
@@ -52,7 +52,7 @@ public class PinController {
      * @return inserted pin
      */
     @RequestMapping(
-            value = "/mypins",
+            value = "/pins",
             method = RequestMethod.POST,
             consumes = "application/json"
     )

@@ -55,7 +55,7 @@ public class PinControllerIT extends BaseIntegrationTest {
         List<Pin> pinsFromBase = pinsRepository.findByUser(currentUser);
 
         // Act
-        HttpResponse<String> response = setAuthHeader(Unirest.get(getTestApiUrl() + "/mypins")).asString();
+        HttpResponse<String> response = setAuthHeader(Unirest.get(getTestApiUrl() + "/pins")).asString();
 
         // Assert
         PinsCollectionDTO pins = gson.fromJson(response.getBody(), PinsCollectionDTO.class);
@@ -74,7 +74,7 @@ public class PinControllerIT extends BaseIntegrationTest {
     public void getMyPinsUnauthorized() throws UnirestException {
 
         // Act
-        HttpResponse<JsonNode> jsonNodeHttpResponse = Unirest.get(getTestApiUrl() + "/mypins").asJson();
+        HttpResponse<JsonNode> jsonNodeHttpResponse = Unirest.get(getTestApiUrl() + "/pins").asJson();
 
         // Assert
         assertThat(jsonNodeHttpResponse.getStatus()).isEqualTo(SC_UNAUTHORIZED);
@@ -92,7 +92,7 @@ public class PinControllerIT extends BaseIntegrationTest {
         String jsonPin = gson.toJson(pinToAdd);
 
         // Act
-        HttpResponse<String> response = setAuthHeader(Unirest.post(getTestApiUrl() + "/mypins"))
+        HttpResponse<String> response = setAuthHeader(Unirest.post(getTestApiUrl() + "/pins"))
                 .header("accept", "application/json")
                 .header("Content-Type", "application/json")
                 .body(jsonPin)
@@ -124,7 +124,7 @@ public class PinControllerIT extends BaseIntegrationTest {
         String jsonPin = gson.toJson(pinToAdd);
 
         // Act
-        HttpResponse<JsonNode> jsonNodeHttpResponse = Unirest.post(getTestApiUrl() + "/mypins").body(jsonPin).asJson();
+        HttpResponse<JsonNode> jsonNodeHttpResponse = Unirest.post(getTestApiUrl() + "/pins").body(jsonPin).asJson();
 
         // Assert
         assertThat(jsonNodeHttpResponse.getStatus()).isEqualTo(SC_UNAUTHORIZED);
