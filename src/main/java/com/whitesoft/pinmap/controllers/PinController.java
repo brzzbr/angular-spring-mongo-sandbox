@@ -2,9 +2,11 @@ package com.whitesoft.pinmap.controllers;
 
 import com.whitesoft.pinmap.converters.PinToPinDTOConverter;
 import com.whitesoft.pinmap.domain.Pin;
+import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.dto.PinDTO;
 import com.whitesoft.pinmap.dto.PinsCollectionDTO;
 import com.whitesoft.pinmap.services.PinService;
+import com.whitesoft.pinmap.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,9 @@ import java.util.stream.Collectors;
 public class PinController {
 
     @Autowired
+    protected UserService userService;
+
+    @Autowired
     protected PinService pinService;
 
     @Autowired
@@ -41,7 +46,8 @@ public class PinController {
     )
     public PinsCollectionDTO getPins(){
 
-        return new PinsCollectionDTO(pinService.getMyPins().stream()
+        User user = userService.getCurrentUser();
+        return new PinsCollectionDTO(pinService.getPins(user).stream()
                 .map(converter::convert)
                 .collect(Collectors.toList()));
     }
@@ -64,7 +70,8 @@ public class PinController {
         pinToInsert.setLocation(pin.getLocation());
         pinToInsert.setCreated(new Date());
 
-        Pin insertedPin = pinService.addMyPin(pinToInsert);
+        User user = userService.getCurrentUser();
+        Pin insertedPin = pinService.addMyPin(user, pinToInsert);
         return converter.convert(insertedPin);
     }
 }

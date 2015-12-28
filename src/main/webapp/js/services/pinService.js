@@ -8,7 +8,7 @@
 
     function pinService($http, $resource) {
 
-        var pinResource = $resource('/api/mypins');
+        var pinResource = $resource('/api/pins');
 
         return {
             getMyPins: getMyPins,

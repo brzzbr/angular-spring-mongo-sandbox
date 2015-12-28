@@ -5,8 +5,6 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.mashape.unirest.request.HttpRequestWithBody;
-import com.mashape.unirest.request.body.RequestBodyEntity;
 import com.whitesoft.pinmap.config.serialization.GSONFactory;
 import com.whitesoft.pinmap.controllers.PinController;
 import com.whitesoft.pinmap.domain.Pin;
@@ -23,6 +21,7 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
 import java.util.List;
 
+import static com.whitesoft.pinmap.tests.TestDataFactory.getCorrectLogin;
 import static com.whitesoft.pinmap.tests.TestDataFactory.getTestApiUrl;
 import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 import static org.assertj.core.api.StrictAssertions.assertThat;
@@ -102,6 +101,7 @@ public class PinControllerIT extends BaseIntegrationTest {
         PinDTO insertedPin = gson.fromJson(response.getBody(), PinDTO.class);
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(insertedPin).isNotNull();
+        softAssertions.assertThat(insertedPin.getUsername()).isEqualTo(getCorrectLogin());
         softAssertions.assertThat(insertedPin.getName()).isEqualTo(pinToAdd.getName());
         softAssertions.assertThat(insertedPin.getDescription()).isEqualTo(pinToAdd.getDescription());
         softAssertions.assertThat(insertedPin.getLocation().getX()).isEqualTo(pinToAdd.getLocation().getX());

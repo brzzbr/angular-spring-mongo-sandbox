@@ -54,11 +54,10 @@ public class PinServiceImplTest {
         // Arrange
         User user = getValidTestUser();
         List<Pin> pins = getTestPins();
-        Mockito.when(userService.getCurrentUser()).thenReturn(user);
         Mockito.when(pinsRepository.findByUser(user)).thenReturn(pins);
 
         // Act
-        List<Pin> myPins = pinService.getMyPins();
+        List<Pin> myPins = pinService.getPins(user);
 
         // Assert
         SoftAssertions softAssertions = new SoftAssertions();
@@ -82,11 +81,10 @@ public class PinServiceImplTest {
         pinToInsert.setName(insertedPin.getName());
         pinToInsert.setDescription(insertedPin.getDescription());
         pinToInsert.setLocation(insertedPin.getLocation());
-        Mockito.when(userService.getCurrentUser()).thenReturn(user);
         Mockito.when(pinsRepository.insert(pinToInsert)).thenReturn(insertedPin);
 
         // Act
-        Pin returnedPin = pinService.addMyPin(pinToInsert);
+        Pin returnedPin = pinService.addMyPin(user, pinToInsert);
 
         // Assert
         SoftAssertions softAssertions = new SoftAssertions();
@@ -94,6 +92,7 @@ public class PinServiceImplTest {
         softAssertions.assertThat(returnedPin.getName()).isEqualTo(insertedPin.getName());
         softAssertions.assertThat(returnedPin.getDescription()).isEqualTo(insertedPin.getDescription());
         softAssertions.assertThat(returnedPin.getUser().getUsername()).isEqualTo(insertedPin.getUser().getUsername());
+        softAssertions.assertThat(returnedPin.getUsername()).isEqualTo(user.getUsername());
         softAssertions.assertThat(returnedPin.getLocation().getX()).isEqualTo(insertedPin.getLocation().getX());
         softAssertions.assertThat(returnedPin.getLocation().getY()).isEqualTo(insertedPin.getLocation().getY());
         softAssertions.assertAll();
@@ -107,12 +106,11 @@ public class PinServiceImplTest {
 
         // Arrange
         User user = getValidTestUser();
-        Mockito.when(userService.getCurrentUser()).thenReturn(user);
         Pin pinToInsert = new Pin();
         pinToInsert.setLocation(new GeoJsonPoint(500, 100));
 
         // Act
-        pinService.addMyPin(pinToInsert);
+        pinService.addMyPin(user, pinToInsert);
     }
 
     /**
@@ -123,10 +121,9 @@ public class PinServiceImplTest {
 
         // Arrange
         User user = getValidTestUser();
-        Mockito.when(userService.getCurrentUser()).thenReturn(user);
         Pin pinToInsert = new Pin();
 
         // Act
-        pinService.addMyPin(pinToInsert);
+        pinService.addMyPin(user, pinToInsert);
     }
 }

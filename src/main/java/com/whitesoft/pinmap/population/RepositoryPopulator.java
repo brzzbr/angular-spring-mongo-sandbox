@@ -58,6 +58,7 @@ public class RepositoryPopulator implements InitializingBean {
         pin_1_1.setLocation(new GeoJsonPoint(-163.341718368527, 58.979056611115));
         pin_1_1.setCreated(new Date());
         pin_1_1.setUser(user_1);
+        pin_1_1.setUsername(user_1.getUsername());
         pinsRepository.insert(pin_1_1);
 
         Pin pin_1_2 = new Pin();
@@ -66,6 +67,7 @@ public class RepositoryPopulator implements InitializingBean {
         pin_1_2.setLocation(new GeoJsonPoint(-139.71654875834193, -1.284906816104069));
         pin_1_2.setCreated(new Date());
         pin_1_2.setUser(user_1);
+        pin_1_2.setUsername(user_1.getUsername());
         pinsRepository.insert(pin_1_2);
 
         Pin pin_1_3 = new Pin();
@@ -74,6 +76,7 @@ public class RepositoryPopulator implements InitializingBean {
         pin_1_3.setLocation(new GeoJsonPoint(33.65962669212195, -87.27739778850307));
         pin_1_3.setCreated(new Date());
         pin_1_3.setUser(user_1);
+        pin_1_3.setUsername(user_1.getUsername());
         pinsRepository.insert(pin_1_3);
 
         Pin pin_1_4 = new Pin();
@@ -82,6 +85,7 @@ public class RepositoryPopulator implements InitializingBean {
         pin_1_4.setLocation(new GeoJsonPoint(8.776460088647042, 34.05230739727284));
         pin_1_4.setCreated(new Date());
         pin_1_4.setUser(user_1);
+        pin_1_4.setUsername(user_1.getUsername());
         pinsRepository.insert(pin_1_4);
 
         Pin pin_1_5 = new Pin();
@@ -90,6 +94,7 @@ public class RepositoryPopulator implements InitializingBean {
         pin_1_5.setLocation(new GeoJsonPoint(-55.37909116752343, 28.046531409558185));
         pin_1_5.setCreated(new Date());
         pin_1_5.setUser(user_1);
+        pin_1_5.setUsername(user_1.getUsername());
         pinsRepository.insert(pin_1_5);
 
         // test user johndoe
@@ -105,6 +110,7 @@ public class RepositoryPopulator implements InitializingBean {
         pin_2_1.setLocation(new GeoJsonPoint(133.98993214620953, -17.612796956109392));
         pin_2_1.setCreated(new Date());
         pin_2_1.setUser(user_2);
+        pin_2_1.setUsername(user_2.getUsername());
         pinsRepository.insert(pin_2_1);
 
         Pin pin_2_2 = new Pin();
@@ -113,6 +119,7 @@ public class RepositoryPopulator implements InitializingBean {
         pin_2_2.setLocation(new GeoJsonPoint(-171.0439395038345, -17.049799811339597));
         pin_2_2.setCreated(new Date());
         pin_2_2.setUser(user_2);
+        pin_2_2.setUsername(user_2.getUsername());
         pinsRepository.insert(pin_2_2);
 
         Pin pin_2_3 = new Pin();
@@ -121,6 +128,7 @@ public class RepositoryPopulator implements InitializingBean {
         pin_2_3.setLocation(new GeoJsonPoint(-108.56803032130665, 36.883067827456614));
         pin_2_3.setCreated(new Date());
         pin_2_3.setUser(user_2);
+        pin_2_3.setUsername(user_2.getUsername());
         pinsRepository.insert(pin_2_3);
 
         // test user kermitthefrog
@@ -136,6 +144,7 @@ public class RepositoryPopulator implements InitializingBean {
         pin_3_1.setLocation(new GeoJsonPoint(171.38492559118833, -32.869736261757886));
         pin_3_1.setCreated(new Date());
         pin_3_1.setUser(user_3);
+        pin_3_1.setUsername(user_3.getUsername());
         pinsRepository.insert(pin_3_1);
 
         // user tzarivan is subscribed on johndoe

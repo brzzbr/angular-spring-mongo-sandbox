@@ -47,6 +47,7 @@ public final class TestDataFactory {
             Pin pin = new Pin();
             pin.setDescription("testDescription");
             pin.setUser(user);
+            pin.setUsername(user.getUsername());
             pin.setLocation(getRandomLocation());
             pin.setCreated(new Date());
             pin.setName("testName" + 1);

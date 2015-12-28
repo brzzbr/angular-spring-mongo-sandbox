@@ -23,17 +23,19 @@ public class PinServiceImpl implements PinService {
     protected UserService userService;
 
     @Autowired
+    protected SubService subService;
+
+    @Autowired
     protected PinsRepository pinsRepository;
 
     @Override
-    public List<Pin> getMyPins() {
+    public List<Pin> getPins(User user) {
 
-        User currentUser = userService.getCurrentUser();
-        return pinsRepository.findByUser(currentUser);
+        return pinsRepository.findByUser(user);
     }
 
     @Override
-    public Pin addMyPin(Pin pin) {
+    public Pin addMyPin(User user, Pin pin) {
 
         if(pin.getLocation() == null ||
                 pin.getLocation().getX() > 180.0 ||
@@ -43,8 +45,8 @@ public class PinServiceImpl implements PinService {
             throw new InvalidPinException();
         }
 
-        User currentUser = userService.getCurrentUser();
-        pin.setUser(currentUser);
+        pin.setUser(user);
+        pin.setUsername(user.getUsername());
 
         return pinsRepository.insert(pin);
     }

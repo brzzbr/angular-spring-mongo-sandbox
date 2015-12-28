@@ -35,7 +35,7 @@ public class UserController {
 
         User user = userService.getUser(username);
 
-        return new UserDTO(
-                );
+        return new UserDTO(user.getId(),
+                user.getUsername());
     }
 }

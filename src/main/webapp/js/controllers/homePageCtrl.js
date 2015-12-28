@@ -145,7 +145,7 @@
                 longitude: pin.location.x,
                 name: pin.name,
                 description: pin.description,
-                userName: pin.userName,
+                userName: pin.username,
                 created: dateFormat(new Date(pin.created), "default"),
                 options: {
                     labelContent: pin.name,
