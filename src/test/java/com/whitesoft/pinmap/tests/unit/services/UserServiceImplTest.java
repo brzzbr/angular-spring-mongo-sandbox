@@ -42,18 +42,15 @@ public class UserServiceImplTest {
 
         // Assert
         User testUser = TestDataFactory.getValidTestUser();
-        Mockito.when(usersRepository.findByLogin(testUser.getLogin())).thenReturn(testUser);
+        Mockito.when(usersRepository.findByUsername(testUser.getUsername())).thenReturn(testUser);
 
         // Act
-        User user = userService.getUser(testUser.getLogin());
+        User user = userService.getUser(testUser.getUsername());
 
         // Arrange
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(user).isNotNull();
-        softAssertions.assertThat(user.getEmail()).isEqualTo(testUser.getEmail());
-        softAssertions.assertThat(user.getFirstName()).isEqualTo(testUser.getFirstName());
-        softAssertions.assertThat(user.getLastName()).isEqualTo(testUser.getLastName());
-        softAssertions.assertThat(user.getLogin()).isEqualTo(testUser.getLogin());
+        softAssertions.assertThat(user.getUsername()).isEqualTo(testUser.getUsername());
         softAssertions.assertThat(user.getPassword()).isEqualTo(testUser.getPassword());
         softAssertions.assertAll();
     }
@@ -66,7 +63,7 @@ public class UserServiceImplTest {
 
         // Assert
         String testLogin = "testLogin";
-        Mockito.when(usersRepository.findByLogin(testLogin)).thenReturn(null);
+        Mockito.when(usersRepository.findByUsername(testLogin)).thenReturn(null);
 
         // Act
         User user = userService.getUser(testLogin);

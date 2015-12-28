@@ -117,7 +117,7 @@ public class PinsRepositoryIT extends BaseIntegrationTest {
     public void findByUser(){
 
         // Arrange
-        User tzarivan = usersRepository.findByLogin(getCorrectLogin());
+        User tzarivan = usersRepository.findByUsername(getCorrectLogin());
 
         // Act
         List<Pin> pins = pinsRepository.findByUser(tzarivan);

@@ -21,9 +21,7 @@ public class PinToPinDTOConverter implements Converter<Pin, PinDTO> {
                 fromObj.getId(),
                 fromObj.getName(),
                 fromObj.getDescription(),
-                String.format("%s %s",
-                        fromObj.getUser().getFirstName(),
-                        fromObj.getUser().getLastName()),
+                fromObj.getUsername(),
                 fromObj.getLocation(),
                 fromObj.getCreated());
     }

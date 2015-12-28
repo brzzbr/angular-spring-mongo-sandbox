@@ -33,13 +33,13 @@ public class PinController {
 
     /**
      * Gets pins for current authenticated user
-     * @return collection of current user's pins
+     * @return collection of current user's pins with pins of subscription-users
      */
     @RequestMapping(
             value = "/mypins",
             method = RequestMethod.GET
     )
-    public PinsCollectionDTO getMyPins(){
+    public PinsCollectionDTO getPins(){
 
         return new PinsCollectionDTO(pinService.getMyPins().stream()
                 .map(converter::convert)
@@ -56,7 +56,7 @@ public class PinController {
             method = RequestMethod.POST,
             consumes = "application/json"
     )
-    public PinDTO addMyPin(@RequestBody PinDTO pin){
+    public PinDTO addPin(@RequestBody PinDTO pin){
 
         Pin pinToInsert = new Pin();
         pinToInsert.setName(pin.getName());

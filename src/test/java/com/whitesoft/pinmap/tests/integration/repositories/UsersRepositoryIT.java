@@ -29,7 +29,7 @@ public class UsersRepositoryIT extends BaseIntegrationTest{
     public void findByLogin() {
 
         // Act
-        User tzarivan = usersRepository.findByLogin(getCorrectLogin());
+        User tzarivan = usersRepository.findByUsername(getCorrectLogin());
 
         // Assert
         assertThat(tzarivan).isNotNull();
@@ -42,7 +42,7 @@ public class UsersRepositoryIT extends BaseIntegrationTest{
     public void findByLoginWithNullResult() {
 
         // Act
-        User tzarivan = usersRepository.findByLogin(getWrongLogin());
+        User tzarivan = usersRepository.findByUsername(getWrongLogin());
 
         // Assert
         assertThat(tzarivan).isNull();

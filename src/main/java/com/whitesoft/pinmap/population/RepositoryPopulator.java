@@ -47,10 +47,7 @@ public class RepositoryPopulator implements InitializingBean {
 
         // test user tzarivan
         User user_1 = new User();
-        user_1.setLogin("tzarivan");
-        user_1.setFirstName("Tzar");
-        user_1.setLastName("Ivan");
-        user_1.setEmail("tzar@kremlin.ru");
+        user_1.setUsername("tzarivan");
         user_1.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
         user_1.setLastLogin(new Date());
         user_1 = usersRepository.insert(user_1);
@@ -97,10 +94,7 @@ public class RepositoryPopulator implements InitializingBean {
 
         // test user johndoe
         User user_2 = new User();
-        user_2.setLogin("johndoe");
-        user_2.setFirstName("John");
-        user_2.setLastName("Doe");
-        user_2.setEmail("john@gmail.com");
+        user_2.setUsername("johndoe");
         user_2.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
         user_2.setLastLogin(new Date());
         user_2 = usersRepository.insert(user_2);
@@ -131,10 +125,7 @@ public class RepositoryPopulator implements InitializingBean {
 
         // test user kermitthefrog
         User user_3 = new User();
-        user_3.setLogin("kermitthefrog");
-        user_3.setFirstName("Kermit");
-        user_3.setLastName("Frog");
-        user_3.setEmail("kermitthefrog@muppet.com");
+        user_3.setUsername("kermitthefrog");
         user_3.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
         user_3.setLastLogin(new Date());
         user_3 = usersRepository.insert(user_3);

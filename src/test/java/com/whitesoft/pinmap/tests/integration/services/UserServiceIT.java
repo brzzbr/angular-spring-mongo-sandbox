@@ -44,7 +44,7 @@ public class UserServiceIT extends BaseIntegrationTest {
         // Assert
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(tzarivan).isNotNull();
-        softAssertions.assertThat(tzarivan.getLogin()).isEqualTo(login);
+        softAssertions.assertThat(tzarivan.getUsername()).isEqualTo(login);
         softAssertions.assertThat(tzarivan.getPassword()).isEqualTo(password);
         softAssertions.assertAll();
     }

@@ -93,7 +93,7 @@ public class PinServiceImplTest {
         softAssertions.assertThat(returnedPin).isNotNull();
         softAssertions.assertThat(returnedPin.getName()).isEqualTo(insertedPin.getName());
         softAssertions.assertThat(returnedPin.getDescription()).isEqualTo(insertedPin.getDescription());
-        softAssertions.assertThat(returnedPin.getUser().getLogin()).isEqualTo(insertedPin.getUser().getLogin());
+        softAssertions.assertThat(returnedPin.getUser().getUsername()).isEqualTo(insertedPin.getUser().getUsername());
         softAssertions.assertThat(returnedPin.getLocation().getX()).isEqualTo(insertedPin.getLocation().getX());
         softAssertions.assertThat(returnedPin.getLocation().getY()).isEqualTo(insertedPin.getLocation().getY());
         softAssertions.assertAll();

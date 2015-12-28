@@ -2,7 +2,6 @@ package com.whitesoft.pinmap.tests;
 
 import com.whitesoft.pinmap.domain.Pin;
 import com.whitesoft.pinmap.domain.User;
-import edu.emory.mathcs.backport.java.util.Arrays;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
 import java.util.ArrayList;
@@ -32,10 +31,7 @@ public final class TestDataFactory {
     public static User getValidTestUser(){
 
         User result = new User();
-        result.setEmail("test@test.test");
-        result.setFirstName("testFirstName");
-        result.setLastName("testLastName");
-        result.setLogin("testLogin");
+        result.setUsername("testLogin");
         result.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
 
         return result;

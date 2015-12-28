@@ -34,14 +34,8 @@ public class UserController {
     public UserDTO getUser(@PathVariable() String username){
 
         User user = userService.getUser(username);
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
-        String initial = firstName.substring(0, 1);
 
         return new UserDTO(
-                firstName,
-                lastName,
-                String.format("%s. %s", initial, lastName),
-                user.getEmail());
+                );
     }
 }
