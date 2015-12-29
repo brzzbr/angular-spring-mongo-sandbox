@@ -11,10 +11,20 @@
                 <span class="badge">{{ctrl.mySubs.length}}</span>
                 <span class="caret"></span>
             </button>
-            <div class="dropdown-menu" style="padding:17px;">
+            <div class="dropdown-menu" style="padding:20px">
 
-                <div ng-repeat="sub in ctrl.mySubs">
-                    <button class="btn btn-warning btn-sm" style="margin: 2px 2px" ng-click="ctrl.unsubscribeFromUser(sub.author)">
+                <div class="row">
+                    <div class="input-group" style="padding: 10px 2px">
+                        <span class="input-group-addon">@</span>
+                        <input type="text" class="form-control" placeholder="Username"
+                               ng-model="ctrl.userToSubscribe"
+                               ng-enter="ctrl.subscribeOnUser(ctrl.userToSubscribe)">
+                    </div>
+                </div>
+
+                <div class="row" ng-repeat="sub in ctrl.mySubs">
+                    <button class="btn btn-warning btn-sm" style="margin: 2px"
+                            ng-click="ctrl.unsubscribeFromUser(sub.author)">
                         {{sub.author}}
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>

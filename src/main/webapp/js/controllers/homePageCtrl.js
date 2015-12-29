@@ -24,6 +24,8 @@
         thisCtrl.mySubs = [];
         // pin events (like click) handler
         thisCtrl.markerEvents = {};
+        // user to subscribe
+        thisCtrl.userToSubscribe = '';
 
         // logout method
         thisCtrl.logout = logout;
@@ -106,27 +108,10 @@
                 });
 
             // gets pins for current user
-            pinService.getMyPins()
-                .then(function (response) {
-
-                    response.items.forEach(function (pin) {
-                        thisCtrl.myPins.push(pinDtoToPin(pin));
-                    });
-                });
+            refreshPins();
 
             // gets subscriptions for current user
-            subService.getMySubs()
-                .then(function (response) {
-
-                    response.items.forEach(function (sub) {
-                        thisCtrl.mySubs.push({
-                            id: sub.id,
-                            author: sub.author,
-                            subscriber: sub.subscriber,
-                            since: dateFormat(new Date(sub.since), 'default')
-                        });
-                    });
-                })
+            refreshSubs();
         }
 
         function logout() {
@@ -157,7 +142,15 @@
             subService.subscribe(user)
                 .then(function (result) {
 
+                    // add a sub to list
+                    thisCtrl.mySubs.push(subDtoToSub(result));
+
+                    // todo: get pins for sub and add them to list of pins
+                    // refresh all the pins
+                    refreshPins();
                 });
+
+            thisCtrl.userToSubscribe = '';
         }
 
         function unsubscribeFromUser(user) {
@@ -165,16 +158,24 @@
             subService.unsubscribe(user)
                 .then(function (result) {
 
+                    // get rid of unsubscribed sub
                     thisCtrl.mySubs = thisCtrl.mySubs
                         .filter(function (item) {
 
                             return item.author !== user;
                         });
+
+                    // get rid of pins of unsubscribed author
+                    thisCtrl.myPins = thisCtrl.myPins
+                        .filter(function (item) {
+
+                            return item.userName !== user;
+                        });
                 });
         }
 
         /**
-         * function for conversion pin from server to stored pin
+         * function for conversion pin from server to front pin
          * @param pin
          */
         function pinDtoToPin(pin) {
@@ -195,6 +196,42 @@
                     icon: pin.username === thisCtrl.username ? 'img/greendot.png' : 'img/bluedot.png'
                 }
             };
+        }
+
+        /**
+         * function fot conversion from server to front sub
+         * @param sub
+         */
+        function subDtoToSub(sub){
+
+            return {
+                id: sub.id,
+                author: sub.author,
+                subscriber: sub.subscriber,
+                since: dateFormat(new Date(sub.since), 'default')
+            };
+        }
+
+        function refreshPins(){
+
+            pinService.getMyPins()
+                .then(function (response) {
+
+                    response.items.forEach(function (pin) {
+                        thisCtrl.myPins.push(pinDtoToPin(pin));
+                    });
+                });
+        }
+
+        function refreshSubs(){
+
+            subService.getMySubs()
+                .then(function (response) {
+
+                    response.items.forEach(function (sub) {
+                        thisCtrl.mySubs.push(subDtoToSub(sub));
+                    });
+                });
         }
     }
 

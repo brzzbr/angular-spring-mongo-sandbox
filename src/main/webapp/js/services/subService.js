@@ -35,12 +35,15 @@
         }
 
         function subscribe(user) {
-
+            return subResource.subscribe({user: user}).$promise
+                .then(function (result) {
+                    return result;
+                });
         }
 
         function unsubscribe(user) {
             return subResource.unsubscribe({user: user}).$promise
-                .then(function(result){
+                .then(function (result) {
 
                 });
         }
