@@ -7,6 +7,7 @@ import com.whitesoft.pinmap.dto.SubDTO;
 import com.whitesoft.pinmap.services.SubService;
 import com.whitesoft.pinmap.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +34,10 @@ public class SubController {
     @Autowired
     protected SubDTOConverter converter;
 
+    /**
+     * Gets all user's subscriptions
+     * @return subscriptions
+     */
     @RequestMapping(
             value = "/subs",
             method = RequestMethod.GET
@@ -43,5 +48,35 @@ public class SubController {
         return new CollectionDTO<>(subService.getSubs(user).stream()
                 .map(converter::convert)
                 .collect(Collectors.toList()));
+    }
+
+    /**
+     * Unsubscribes current user from author's pins
+     * @param authorName aunthor name
+     */
+    @RequestMapping(
+            value="/subs/{authorName}",
+            method = RequestMethod.POST
+    )
+    public SubDTO subscribe(@PathVariable String authorName){
+
+        User subscriber = userService.getCurrentUser();
+        User author = userService.getUser(authorName);
+        return converter.convert(subService.subscribe(subscriber, author));
+    }
+
+    /**
+     * Unsubscribes current user from author's pins
+     * @param authorName aunthor name
+     */
+    @RequestMapping(
+            value="/subs/{authorName}",
+            method = RequestMethod.DELETE
+    )
+    public void unsubscribe(@PathVariable  String authorName){
+
+        User subscriber = userService.getCurrentUser();
+        User author = userService.getUser(authorName);
+        subService.unsubscribe(subscriber, author);
     }
 }

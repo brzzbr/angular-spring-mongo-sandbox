@@ -1,14 +1,25 @@
 /**
  * Created by borisbondarenko on 28.12.15.
  */
-(function(){
+(function () {
 
     angular.module('pinmap')
         .service('subService', ['$resource', subService]);
 
     function subService($resource) {
 
-        var subResource = $resource('/api/subs');
+        var subResource = $resource('/api/subs/:user',
+            {
+                user: '@user'
+            },
+            {
+                subscribe: {
+                    method: 'POST'
+                },
+                unsubscribe: {
+                    method: 'DELETE'
+                }
+            });
 
         return {
             getMySubs: getMySubs,
@@ -28,7 +39,10 @@
         }
 
         function unsubscribe(user) {
+            return subResource.unsubscribe({user: user}).$promise
+                .then(function(result){
 
+                });
         }
     }
 })();

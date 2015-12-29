@@ -20,4 +20,18 @@ public interface SubService {
      * @return a list of user"s subscriptions
      */
     List<Sub> getSubs(User user);
+
+    /**
+     * Subscribes subscriber to author's pins
+     * @param subscriber subscriber user
+     * @param author author user
+     */
+    Sub subscribe(User subscriber, User author);
+
+    /**
+     * Unsubscribes subscriber from author's pins
+     * @param subscriber subscriber user
+     * @param author author user
+     */
+    void unsubscribe(User subscriber, User author);
 }

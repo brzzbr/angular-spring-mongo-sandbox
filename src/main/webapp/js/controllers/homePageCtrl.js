@@ -4,9 +4,9 @@
 (function () {
 
     angular.module('pinmap')
-        .controller('homeCtrl', ['$scope', 'authService', 'pinService', 'userService', homeCtrl]);
+        .controller('homeCtrl', ['$scope', 'authService', 'pinService', 'userService', 'subService', homeCtrl]);
 
-    function homeCtrl($scope, authService, pinService, userService) {
+    function homeCtrl($scope, authService, pinService, userService, subService) {
 
         var thisCtrl = this;
 
@@ -29,6 +29,10 @@
         thisCtrl.logout = logout;
         // add new pin method
         thisCtrl.addNewPin = addNewPin;
+        // subscribe method
+        thisCtrl.subscribeOnUser = subscribeOnUser;
+        // unsubscribe method
+        thisCtrl.unsubscribeFromUser = unsubscribeFromUser;
 
         initModel();
         function initModel() {
@@ -40,7 +44,7 @@
                 pan: 1,
                 control: {},
                 options: {
-                    disableDoubleClickZoom: true,
+                    disableDoubleClickZoom: true
                 },
                 mapEvents: {
                     dblclick: function (mapModel, eventName, args) {
@@ -109,6 +113,20 @@
                         thisCtrl.myPins.push(pinDtoToPin(pin));
                     });
                 });
+
+            // gets subscriptions for current user
+            subService.getMySubs()
+                .then(function (response) {
+
+                    response.items.forEach(function (sub) {
+                        thisCtrl.mySubs.push({
+                            id: sub.id,
+                            author: sub.author,
+                            subscriber: sub.subscriber,
+                            since: dateFormat(new Date(sub.since), 'default')
+                        });
+                    });
+                })
         }
 
         function logout() {
@@ -135,6 +153,26 @@
             thisCtrl.addPin.show = false;
         }
 
+        function subscribeOnUser(user) {
+            subService.subscribe(user)
+                .then(function (result) {
+
+                });
+        }
+
+        function unsubscribeFromUser(user) {
+
+            subService.unsubscribe(user)
+                .then(function (result) {
+
+                    thisCtrl.mySubs = thisCtrl.mySubs
+                        .filter(function (item) {
+
+                            return item.author !== user;
+                        });
+                });
+        }
+
         /**
          * function for conversion pin from server to stored pin
          * @param pin
@@ -148,7 +186,7 @@
                 name: pin.name,
                 description: pin.description,
                 userName: pin.username,
-                created: dateFormat(new Date(pin.created), "default"),
+                created: dateFormat(new Date(pin.created), 'default'),
                 options: {
                     labelContent: pin.name,
                     labelAnchor: '0 0',
