@@ -3,6 +3,7 @@ package com.whitesoft.pinmap.services;
 import com.whitesoft.pinmap.domain.Pin;
 import com.whitesoft.pinmap.domain.User;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,13 @@ public interface PinService {
      * @return collection of user's pin
      */
     List<Pin> getPins(User user);
+
+    /**
+     * Gets pins of current authenticated user including pins from subs
+     * from particular date
+     * @return collection of user's pin
+     */
+    List<Pin> getPins(User user, Date fromDate);
 
     /**
      * Submits new pin for current user

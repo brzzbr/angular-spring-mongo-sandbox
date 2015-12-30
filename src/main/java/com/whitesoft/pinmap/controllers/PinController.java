@@ -1,17 +1,14 @@
 package com.whitesoft.pinmap.controllers;
 
-import com.whitesoft.pinmap.converters.PinDTOConverter;
 import com.whitesoft.pinmap.domain.Pin;
 import com.whitesoft.pinmap.domain.User;
-import com.whitesoft.pinmap.dto.PinDTO;
 import com.whitesoft.pinmap.dto.CollectionDTO;
+import com.whitesoft.pinmap.dto.PinDTO;
 import com.whitesoft.pinmap.services.PinService;
 import com.whitesoft.pinmap.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -34,7 +31,7 @@ public class PinController {
     protected PinService pinService;
 
     @Autowired
-    protected PinDTOConverter converter;
+    protected ConversionService conversionService;
 
     /**
      * Gets pins for current authenticated user
@@ -44,11 +41,12 @@ public class PinController {
             value = "/pins",
             method = RequestMethod.GET
     )
-    public CollectionDTO<PinDTO> getPins(){
+    public CollectionDTO<PinDTO> getPins(
+            @RequestParam(value = "fromdate", required = false) Date fromDate){
 
         User user = userService.getCurrentUser();
-        return new CollectionDTO<>(pinService.getPins(user).stream()
-                .map(converter::convert)
+        return new CollectionDTO<>(pinService.getPins(user, fromDate).stream()
+                .map(pin -> conversionService.convert(pin, PinDTO.class))
                 .collect(Collectors.toList()));
     }
 
@@ -72,6 +70,6 @@ public class PinController {
 
         User user = userService.getCurrentUser();
         Pin insertedPin = pinService.addMyPin(user, pinToInsert);
-        return converter.convert(insertedPin);
+        return conversionService.convert(insertedPin, PinDTO.class);
     }
 }

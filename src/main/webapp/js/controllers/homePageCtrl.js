@@ -112,10 +112,20 @@
 
             // gets subscriptions for current user
             refreshSubs();
+
+            // subscibe on pins poller (a part of dirty hack)
+            pinService
+                .pinsPoller(function (response) {
+
+                    response.items.forEach(function (pin) {
+                        thisCtrl.myPins.push(pinDtoToPin(pin));
+                    });
+                });
         }
 
         function logout() {
 
+            pinService.stopPolling();
             authService.logout();
         }
 
@@ -202,7 +212,7 @@
          * function fot conversion from server to front sub
          * @param sub
          */
-        function subDtoToSub(sub){
+        function subDtoToSub(sub) {
 
             return {
                 id: sub.id,
@@ -212,22 +222,24 @@
             };
         }
 
-        function refreshPins(){
+        function refreshPins() {
 
             pinService.getMyPins()
                 .then(function (response) {
 
+                    thisCtrl.myPins = [];
                     response.items.forEach(function (pin) {
                         thisCtrl.myPins.push(pinDtoToPin(pin));
                     });
                 });
         }
 
-        function refreshSubs(){
+        function refreshSubs() {
 
             subService.getMySubs()
                 .then(function (response) {
 
+                    thisCtrl.mySubs = [];
                     response.items.forEach(function (sub) {
                         thisCtrl.mySubs.push(subDtoToSub(sub));
                     });

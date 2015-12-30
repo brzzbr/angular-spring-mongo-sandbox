@@ -4,20 +4,28 @@
 (function () {
 
     angular.module('pinmap')
-        .service('pinService', ['$resource', pinService]);
+        .service('pinService', ['$resource', '$timeout', pinService]);
 
-    function pinService($resource) {
+    function pinService($resource, $timeout) {
 
         var pinResource = $resource('/api/pins');
+        var pollerCallback;
+        var poll;
+
+        var lastPolling = new Date().getTime();
 
         return {
             getMyPins: getMyPins,
-            addPin: addPin
+            addPin: addPin,
+            pinsPoller: pinsPoller,
+            stopPolling: stopPolling
         };
 
         function getMyPins() {
             return pinResource.get().$promise
                 .then(function (pins) {
+
+                    lastPolling = new Date().getTime();
                     return pins;
                 });
         }
@@ -27,6 +35,29 @@
                 .then(function (result) {
                     return result;
                 });
+        }
+
+        // due to some technical issues with web-sockets and XAuth
+        // I forced to use a dirty hack named "short polling" to retrieve
+        // new pins placed by authors of user's subscriptions.
+        function pinsPoller(callback) {
+
+            pollerCallback = callback;
+            var poller = function () {
+                pinResource.get({fromdate: lastPolling}).$promise
+                    .then(function (pins) {
+
+                        lastPolling = new Date().getTime();
+                        pollerCallback(pins);
+                    });
+            };
+            poller();
+
+            poll = setInterval(poller, 5000);
+        }
+
+        function stopPolling() {
+            clearInterval(poll);
         }
     }
 })();

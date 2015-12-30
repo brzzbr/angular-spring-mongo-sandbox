@@ -7,6 +7,7 @@ import com.whitesoft.pinmap.dto.SubDTO;
 import com.whitesoft.pinmap.services.SubService;
 import com.whitesoft.pinmap.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +33,7 @@ public class SubController {
     protected SubService subService;
 
     @Autowired
-    protected SubDTOConverter converter;
+    protected ConversionService conversionService;
 
     /**
      * Gets all user's subscriptions
@@ -46,7 +47,7 @@ public class SubController {
 
         User user = userService.getCurrentUser();
         return new CollectionDTO<>(subService.getSubs(user).stream()
-                .map(converter::convert)
+                .map(sub -> conversionService.convert(sub, SubDTO.class))
                 .collect(Collectors.toList()));
     }
 
@@ -62,7 +63,7 @@ public class SubController {
 
         User subscriber = userService.getCurrentUser();
         User author = userService.getUser(authorName);
-        return converter.convert(subService.subscribe(subscriber, author));
+        return conversionService.convert(subService.subscribe(subscriber, author), SubDTO.class);
     }
 
     /**
