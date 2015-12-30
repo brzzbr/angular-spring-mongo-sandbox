@@ -4,9 +4,9 @@
 (function () {
 
     angular.module('pinmap')
-        .controller('homeCtrl', ['$scope', 'authService', 'pinService', 'userService', 'subService', homeCtrl]);
+        .controller('homeCtrl', ['$scope', 'authService', 'pinService', 'userService', 'subService', 'notifyService', homeCtrl]);
 
-    function homeCtrl($scope, authService, pinService, userService, subService) {
+    function homeCtrl($scope, authService, pinService, userService, subService, notifyService) {
 
         var thisCtrl = this;
 
@@ -117,10 +117,16 @@
             pinService
                 .pinsPoller(function (response) {
 
+                    if(response.items.length > 0){
+                        notifyService.success('You have got some new pins!');
+                    }
+
                     response.items.forEach(function (pin) {
                         thisCtrl.myPins.push(pinDtoToPin(pin));
                     });
                 });
+
+            notifyService.success('Hi there!');
         }
 
         function logout() {

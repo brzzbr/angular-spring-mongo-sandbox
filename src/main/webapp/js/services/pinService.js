@@ -27,6 +27,10 @@
 
                     lastPolling = new Date().getTime();
                     return pins;
+                }, function(error){
+
+                    console.log(error);
+                    notifyService.error('We have got an error while getting your pins');
                 });
         }
 
@@ -34,6 +38,10 @@
             return pinResource.save(pin).$promise
                 .then(function (result) {
                     return result;
+                }, function(error){
+
+                    console.log(error);
+                    notifyService.error('We have got an error while adding a new pin');
                 });
         }
 
@@ -49,6 +57,10 @@
 
                         lastPolling = new Date().getTime();
                         pollerCallback(pins);
+                    }, function(error){
+
+                        console.log(error);
+                        notifyService.error('We have got an error while polling new pins');
                     });
             };
             poller();

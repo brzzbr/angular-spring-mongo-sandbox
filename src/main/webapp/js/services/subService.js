@@ -31,6 +31,10 @@
             return subResource.get().$promise
                 .then(function (subs) {
                     return subs;
+                }, function(error){
+
+                    console.log(error);
+                    notifyService.error('We have got an error while getting your subscriptions');
                 });
         }
 
@@ -38,6 +42,10 @@
             return subResource.subscribe({user: user}).$promise
                 .then(function (result) {
                     return result;
+                }, function(error){
+
+                    console.log(error);
+                    notifyService.error('We have got an error while subscribing on a new author');
                 });
         }
 
@@ -45,6 +53,10 @@
             return subResource.unsubscribe({user: user}).$promise
                 .then(function (result) {
 
+                }, function(error){
+
+                    console.log(error);
+                    notifyService.error('We have got an error while unsubscribing');
                 });
         }
     }
