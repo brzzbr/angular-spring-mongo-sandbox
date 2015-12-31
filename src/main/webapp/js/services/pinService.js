@@ -4,9 +4,9 @@
 (function () {
 
     angular.module('pinmap')
-        .service('pinService', ['$resource', '$timeout', pinService]);
+        .service('pinService', ['$resource', 'notifyService',pinService]);
 
-    function pinService($resource, $timeout) {
+    function pinService($resource, notifyService) {
 
         var pinResource = $resource('/api/pins');
         var pollerCallback;
@@ -60,7 +60,8 @@
                     }, function(error){
 
                         console.log(error);
-                        notifyService.error('We have got an error while polling new pins');
+                        notifyService.error('We have got an error while polling new pins. Poller is stopped!');
+                        stopPolling();
                     });
             };
             poller();

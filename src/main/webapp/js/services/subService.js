@@ -4,9 +4,9 @@
 (function () {
 
     angular.module('pinmap')
-        .service('subService', ['$resource', subService]);
+        .service('subService', ['$resource', 'notifyService',subService]);
 
-    function subService($resource) {
+    function subService($resource, notifyService) {
 
         var subResource = $resource('/api/subs/:user',
             {

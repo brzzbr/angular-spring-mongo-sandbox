@@ -4,9 +4,9 @@
 (function () {
 
     angular.module('pinmap')
-        .service('userService', ['$resource', 'localStorageService', userService]);
+        .service('userService', ['$resource', 'localStorageService', 'notifyService',userService]);
 
-    function userService($resource, localStorageService) {
+    function userService($resource, localStorageService, notifyService) {
 
         var userResource = $resource('/api/user/:id', {id: '@id'});
 

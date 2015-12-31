@@ -117,11 +117,15 @@
             pinService
                 .pinsPoller(function (response) {
 
-                    if(response.items.length > 0){
+                    var items = response.items.filter(function(item){
+                        return item.username !== thisCtrl.username;
+                    });
+
+                    if(items.length > 0){
                         notifyService.success('You have got some new pins!');
                     }
 
-                    response.items.forEach(function (pin) {
+                    items.forEach(function (pin) {
                         thisCtrl.myPins.push(pinDtoToPin(pin));
                     });
                 });
