@@ -19,5 +19,6 @@
 .DS_Store
 src/main/webapp/node
 src/main/webapp/node_modules
-src/main/webapp/app/dist
-src/main/webapp/app/lib
+src/main/webapp/dist
+src/main/webapp/lib
+src/main/webapp/fonts

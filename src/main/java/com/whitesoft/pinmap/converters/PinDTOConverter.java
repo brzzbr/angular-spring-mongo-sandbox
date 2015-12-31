@@ -2,7 +2,8 @@ package com.whitesoft.pinmap.converters;
 
 import com.whitesoft.pinmap.domain.Pin;
 import com.whitesoft.pinmap.dto.PinDTO;
-import org.springframework.stereotype.Service;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by borisbondarenko on 27.12.15.
@@ -11,8 +12,9 @@ import org.springframework.stereotype.Service;
  *
  * @author brzzbr
  */
-@Service
-public class PinToPinDTOConverter implements Converter<Pin, PinDTO> {
+@Component
+@MyConverter
+public class PinDTOConverter implements Converter<Pin, PinDTO> {
 
     @Override
     public PinDTO convert(Pin fromObj) {
@@ -21,9 +23,7 @@ public class PinToPinDTOConverter implements Converter<Pin, PinDTO> {
                 fromObj.getId(),
                 fromObj.getName(),
                 fromObj.getDescription(),
-                String.format("%s %s",
-                        fromObj.getUser().getFirstName(),
-                        fromObj.getUser().getLastName()),
+                fromObj.getUsername(),
                 fromObj.getLocation(),
                 fromObj.getCreated());
     }

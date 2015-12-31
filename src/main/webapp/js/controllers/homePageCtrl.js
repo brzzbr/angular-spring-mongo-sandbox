@@ -4,14 +4,14 @@
 (function () {
 
     angular.module('pinmap')
-        .controller('homeCtrl', ['$scope', 'authService', 'pinService', 'userService', homeCtrl]);
+        .controller('homeCtrl', ['$scope', 'authService', 'pinService', 'userService', 'subService', 'notifyService', homeCtrl]);
 
-    function homeCtrl($scope, authService, pinService, userService) {
+    function homeCtrl($scope, authService, pinService, userService, subService, notifyService) {
 
         var thisCtrl = this;
 
         // user firstName
-        thisCtrl.firstName = '';
+        thisCtrl.username = '';
         // adds GoogleMap
         thisCtrl.map = {};
         // pin info window
@@ -20,13 +20,21 @@
         thisCtrl.addPin = {};
         // my pins
         thisCtrl.myPins = [];
+        // my subscriptions
+        thisCtrl.mySubs = [];
         // pin events (like click) handler
         thisCtrl.markerEvents = {};
+        // user to subscribe
+        thisCtrl.userToSubscribe = '';
 
         // logout method
         thisCtrl.logout = logout;
         // add new pin method
         thisCtrl.addNewPin = addNewPin;
+        // subscribe method
+        thisCtrl.subscribeOnUser = subscribeOnUser;
+        // unsubscribe method
+        thisCtrl.unsubscribeFromUser = unsubscribeFromUser;
 
         initModel();
         function initModel() {
@@ -38,7 +46,7 @@
                 pan: 1,
                 control: {},
                 options: {
-                    disableDoubleClickZoom: true,
+                    disableDoubleClickZoom: true
                 },
                 mapEvents: {
                     dblclick: function (mapModel, eventName, args) {
@@ -96,21 +104,38 @@
             userService.getCurrentUser()
                 .then(function (result) {
 
-                    thisCtrl.firstName = result.fullName;
+                    thisCtrl.username = result.username;
                 });
 
             // gets pins for current user
-            pinService.getMyPins()
-                .then(function (response) {
+            refreshPins();
 
-                    response.items.forEach(function (pin) {
+            // gets subscriptions for current user
+            refreshSubs();
+
+            // subscibe on pins poller (a part of dirty hack)
+            pinService
+                .pinsPoller(function (response) {
+
+                    var items = response.items.filter(function(item){
+                        return item.username !== thisCtrl.username;
+                    });
+
+                    if(items.length > 0){
+                        notifyService.success('You have got some new pins!');
+                    }
+
+                    items.forEach(function (pin) {
                         thisCtrl.myPins.push(pinDtoToPin(pin));
                     });
                 });
+
+            notifyService.success('Hi there!');
         }
 
         function logout() {
 
+            pinService.stopPolling();
             authService.logout();
         }
 
@@ -133,8 +158,44 @@
             thisCtrl.addPin.show = false;
         }
 
+        function subscribeOnUser(user) {
+            subService.subscribe(user)
+                .then(function (result) {
+
+                    // add a sub to list
+                    thisCtrl.mySubs.push(subDtoToSub(result));
+
+                    // todo: get pins for sub and add them to list of pins
+                    // refresh all the pins
+                    refreshPins();
+                });
+
+            thisCtrl.userToSubscribe = '';
+        }
+
+        function unsubscribeFromUser(user) {
+
+            subService.unsubscribe(user)
+                .then(function (result) {
+
+                    // get rid of unsubscribed sub
+                    thisCtrl.mySubs = thisCtrl.mySubs
+                        .filter(function (item) {
+
+                            return item.author !== user;
+                        });
+
+                    // get rid of pins of unsubscribed author
+                    thisCtrl.myPins = thisCtrl.myPins
+                        .filter(function (item) {
+
+                            return item.userName !== user;
+                        });
+                });
+        }
+
         /**
-         * function for conversion pin from server to stored pin
+         * function for conversion pin from server to front pin
          * @param pin
          */
         function pinDtoToPin(pin) {
@@ -145,15 +206,54 @@
                 longitude: pin.location.x,
                 name: pin.name,
                 description: pin.description,
-                userName: pin.userName,
-                created: dateFormat(new Date(pin.created), "default"),
+                userName: pin.username,
+                created: dateFormat(new Date(pin.created), 'default'),
                 options: {
                     labelContent: pin.name,
                     labelAnchor: '0 0',
                     labelVisible: true,
-                    labelClass: 'marker-label'
+                    labelClass: 'marker-label',
+                    icon: pin.username === thisCtrl.username ? 'img/greendot.png' : 'img/bluedot.png'
                 }
             };
+        }
+
+        /**
+         * function fot conversion from server to front sub
+         * @param sub
+         */
+        function subDtoToSub(sub) {
+
+            return {
+                id: sub.id,
+                author: sub.author,
+                subscriber: sub.subscriber,
+                since: dateFormat(new Date(sub.since), 'default')
+            };
+        }
+
+        function refreshPins() {
+
+            pinService.getMyPins()
+                .then(function (response) {
+
+                    thisCtrl.myPins = [];
+                    response.items.forEach(function (pin) {
+                        thisCtrl.myPins.push(pinDtoToPin(pin));
+                    });
+                });
+        }
+
+        function refreshSubs() {
+
+            subService.getMySubs()
+                .then(function (response) {
+
+                    thisCtrl.mySubs = [];
+                    response.items.forEach(function (sub) {
+                        thisCtrl.mySubs.push(subDtoToSub(sub));
+                    });
+                });
         }
     }
 

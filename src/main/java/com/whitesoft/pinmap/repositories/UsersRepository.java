@@ -13,9 +13,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface UsersRepository extends MongoRepository<User, String> {
 
     /**
-     * Returns a user by his login field
-     * @param login user's login
+     * Returns a user by his username field
+     * @param username user's username
      * @return user entity
      */
-    User findByLogin(String login);
+    User findByUsername(String username);
 }

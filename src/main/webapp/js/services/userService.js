@@ -4,9 +4,9 @@
 (function () {
 
     angular.module('pinmap')
-        .service('userService', ['$resource', 'localStorageService', userService]);
+        .service('userService', ['$resource', 'localStorageService', 'notifyService',userService]);
 
-    function userService($resource, localStorageService) {
+    function userService($resource, localStorageService, notifyService) {
 
         var userResource = $resource('/api/user/:id', {id: '@id'});
 
@@ -26,6 +26,10 @@
             return userResource.get({id: username}).$promise
                 .then(function (user) {
                     return user;
+                }, function(error){
+
+                    console.log(error);
+                    notifyService.error('We have got an error during retrieving user info');
                 });
         }
     }

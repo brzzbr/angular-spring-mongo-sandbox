@@ -5,14 +5,12 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.mashape.unirest.request.HttpRequestWithBody;
-import com.mashape.unirest.request.body.RequestBodyEntity;
 import com.whitesoft.pinmap.config.serialization.GSONFactory;
 import com.whitesoft.pinmap.controllers.PinController;
 import com.whitesoft.pinmap.domain.Pin;
 import com.whitesoft.pinmap.domain.User;
 import com.whitesoft.pinmap.dto.PinDTO;
-import com.whitesoft.pinmap.dto.PinsCollectionDTO;
+import com.whitesoft.pinmap.dto.CollectionDTO;
 import com.whitesoft.pinmap.repositories.PinsRepository;
 import com.whitesoft.pinmap.services.UserService;
 import com.whitesoft.pinmap.tests.integration.BaseIntegrationTest;
@@ -23,6 +21,7 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
 import java.util.List;
 
+import static com.whitesoft.pinmap.tests.TestDataFactory.getCorrectLogin;
 import static com.whitesoft.pinmap.tests.TestDataFactory.getTestApiUrl;
 import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 import static org.assertj.core.api.StrictAssertions.assertThat;
@@ -55,10 +54,10 @@ public class PinControllerIT extends BaseIntegrationTest {
         List<Pin> pinsFromBase = pinsRepository.findByUser(currentUser);
 
         // Act
-        HttpResponse<String> response = setAuthHeader(Unirest.get(getTestApiUrl() + "/mypins")).asString();
+        HttpResponse<String> response = setAuthHeader(Unirest.get(getTestApiUrl() + "/pins")).asString();
 
         // Assert
-        PinsCollectionDTO pins = gson.fromJson(response.getBody(), PinsCollectionDTO.class);
+        CollectionDTO pins = gson.fromJson(response.getBody(), CollectionDTO.class);
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(pins).isNotNull();
         softAssertions.assertThat(pins.getItems().size()).isEqualTo(pinsFromBase.size());
@@ -74,7 +73,7 @@ public class PinControllerIT extends BaseIntegrationTest {
     public void getMyPinsUnauthorized() throws UnirestException {
 
         // Act
-        HttpResponse<JsonNode> jsonNodeHttpResponse = Unirest.get(getTestApiUrl() + "/mypins").asJson();
+        HttpResponse<JsonNode> jsonNodeHttpResponse = Unirest.get(getTestApiUrl() + "/pins").asJson();
 
         // Assert
         assertThat(jsonNodeHttpResponse.getStatus()).isEqualTo(SC_UNAUTHORIZED);
@@ -92,7 +91,7 @@ public class PinControllerIT extends BaseIntegrationTest {
         String jsonPin = gson.toJson(pinToAdd);
 
         // Act
-        HttpResponse<String> response = setAuthHeader(Unirest.post(getTestApiUrl() + "/mypins"))
+        HttpResponse<String> response = setAuthHeader(Unirest.post(getTestApiUrl() + "/pins"))
                 .header("accept", "application/json")
                 .header("Content-Type", "application/json")
                 .body(jsonPin)
@@ -102,6 +101,7 @@ public class PinControllerIT extends BaseIntegrationTest {
         PinDTO insertedPin = gson.fromJson(response.getBody(), PinDTO.class);
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(insertedPin).isNotNull();
+        softAssertions.assertThat(insertedPin.getUsername()).isEqualTo(getCorrectLogin());
         softAssertions.assertThat(insertedPin.getName()).isEqualTo(pinToAdd.getName());
         softAssertions.assertThat(insertedPin.getDescription()).isEqualTo(pinToAdd.getDescription());
         softAssertions.assertThat(insertedPin.getLocation().getX()).isEqualTo(pinToAdd.getLocation().getX());
@@ -124,7 +124,7 @@ public class PinControllerIT extends BaseIntegrationTest {
         String jsonPin = gson.toJson(pinToAdd);
 
         // Act
-        HttpResponse<JsonNode> jsonNodeHttpResponse = Unirest.post(getTestApiUrl() + "/mypins").body(jsonPin).asJson();
+        HttpResponse<JsonNode> jsonNodeHttpResponse = Unirest.post(getTestApiUrl() + "/pins").body(jsonPin).asJson();
 
         // Assert
         assertThat(jsonNodeHttpResponse.getStatus()).isEqualTo(SC_UNAUTHORIZED);

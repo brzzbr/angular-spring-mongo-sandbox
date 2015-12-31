@@ -5,6 +5,7 @@ import com.whitesoft.pinmap.domain.User;
 import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +31,14 @@ public interface PinsRepository extends MongoRepository<Pin, String> {
      * @return pins for list of users
      */
     List<Pin> findByUserIn(List<User> users);
+
+    /**
+     * Gets all pins for users list. It's used to retrieve
+     * new pins from particular moment
+     * @param users list of users
+     * @return pins for list of users
+     */
+    List<Pin> findByUserInAndCreatedGreaterThan(List<User> users, Date fromDate);
 
     /**
      * Gets all the pins of user in particular area

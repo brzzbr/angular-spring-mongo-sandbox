@@ -16,7 +16,7 @@ import java.io.IOException;
 
 /**
  * FROM JHIPSTER Generator. Thank you guys!
- * <p>
+ * <p/>
  * Filters incoming requests and installs a Spring Security principal
  * if a header corresponding to a valid user is found.
  */

@@ -19,7 +19,7 @@ public class PinDTO {
 
     private String description;
 
-    private String userName;
+    private String username;
 
     private GeoJsonPoint location;
 
@@ -37,8 +37,8 @@ public class PinDTO {
         return description;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     public GeoJsonPoint getLocation() {
@@ -52,11 +52,16 @@ public class PinDTO {
     public PinDTO() {
     }
 
-    public PinDTO(String id, String name, String description, String userName, GeoJsonPoint location, Date created) {
+    public PinDTO(String id,
+                  String name,
+                  String description,
+                  String username,
+                  GeoJsonPoint location,
+                  Date created) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.userName = userName;
+        this.username = username;
         this.location = location;
         this.created = created;
     }

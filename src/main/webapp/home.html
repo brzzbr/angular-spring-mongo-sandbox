@@ -1,8 +1,37 @@
-<div class="nav navbar-nav navbar-fixed-top">
+<div class="nav navbar-nav navbar-fixed-top navbar-default">
     <div class="container">
         <div class="navbar-brand">
-            Greetings, <u>{{ctrl.firstName}}</u>!
+            Greetings, <u>{{ctrl.username}}</u>!
         </div>
+
+        <div class="btn-group navbar-btn">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-globe"></span>
+                Your subscriptions
+                <span class="badge">{{ctrl.mySubs.length}}</span>
+                <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu" style="padding:20px">
+
+                <div class="row">
+                    <div class="input-group" style="padding: 10px 2px">
+                        <span class="input-group-addon">@</span>
+                        <input type="text" class="form-control" placeholder="Username"
+                               ng-model="ctrl.userToSubscribe"
+                               ng-enter="ctrl.subscribeOnUser(ctrl.userToSubscribe)">
+                    </div>
+                </div>
+
+                <div class="row" ng-repeat="sub in ctrl.mySubs">
+                    <button class="btn btn-warning btn-sm" style="margin: 2px"
+                            ng-click="ctrl.unsubscribeFromUser(sub.author)">
+                        {{sub.author}}
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <button ng-click="ctrl.logout()" class="btn btn-default navbar-btn navbar-right">Logout</button>
     </div>
 </div>
@@ -18,7 +47,7 @@
             coords="ctrl.pinInfo.model"
             options="ctrl.pinInfo.options"
             closeClick="ctrl.pinInfo.closeClick()">
-        <div style="width: 350px">
+        <div style="width: 400px">
             <div style="color: black">
                 <span style="font-weight: bold">{{ctrl.pinInfo.title}}</span>
                 pinned by <span style="font-weight: bold">{{ctrl.pinInfo.userName}}</span>

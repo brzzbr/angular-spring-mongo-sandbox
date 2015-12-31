@@ -5,19 +5,19 @@ import java.util.List;
 /**
  * Created by borisbondarenko on 23.12.15.
  *
- * DTO for transfering collection of pins.
+ * DTO for transfering generic collection.
  *
  * @author brzzbr
  */
-public class PinsCollectionDTO {
+public class CollectionDTO<T> {
 
-    private List<PinDTO> items;
+    private List<T> items;
 
-    public List<PinDTO> getItems() {
+    public List<T> getItems() {
         return items;
     }
 
-    public PinsCollectionDTO(List<PinDTO> items) {
+    public CollectionDTO(List<T> items) {
         this.items = items;
     }
 }

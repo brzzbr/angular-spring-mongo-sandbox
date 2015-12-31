@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(user == null) throw new UsernameNotFoundException("User is absent!");
 
         return new org.springframework.security.core.userdetails.User(
-                user.getLogin(),
+                user.getUsername(),
                 user.getPassword(),
                 true,
                 true,

@@ -9,37 +9,23 @@ package com.whitesoft.pinmap.dto;
  */
 public class UserDTO {
 
-    private String firstName;
+    private String id;
 
-    private String lastName;
+    private String username;
 
-    private String fullName;
-
-    private String email;
-
-    public String getFirstName() {
-        return firstName;
+    public String getId() {
+        return id;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     public UserDTO() {
     }
 
-    public UserDTO(String firstName, String lastName, String fullName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.fullName = fullName;
-        this.email = email;
+    public UserDTO(String id, String username) {
+        this.id = id;
+        this.username = username;
     }
 }

@@ -1,23 +1,23 @@
 package com.whitesoft.pinmap.config;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.whitesoft.pinmap.config.serialization.GSONFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.whitesoft.pinmap.converters.MyConverter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ConversionServiceFactoryBean;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by borisbondarenko on 19.12.15.
@@ -30,6 +30,10 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
+
+    @Resource
+    @MyConverter
+    private Set<Converter<?, ?>> myConverters;
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -47,6 +51,12 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(createGsonHttpMessageConverter());
         super.configureMessageConverters(converters);
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        super.addFormatters(registry);
+        myConverters.forEach(registry::addConverter);
     }
 
     private GsonHttpMessageConverter createGsonHttpMessageConverter() {

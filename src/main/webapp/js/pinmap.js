@@ -2,7 +2,7 @@
  * Created by borisbondarenko on 21.12.15.
  */
 
-angular.module('pinmap', ['LocalStorageModule', 'ui.router', 'uiGmapgoogle-maps', 'ngResource'])
+angular.module('pinmap', ['LocalStorageModule', 'ui.router', 'uiGmapgoogle-maps', 'ngResource', 'cgNotify'])
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
         $stateProvider
@@ -26,13 +26,16 @@ angular.module('pinmap', ['LocalStorageModule', 'ui.router', 'uiGmapgoogle-maps'
         $httpProvider.interceptors.push('authExpiredInterceptor');
         $httpProvider.interceptors.push('authInterceptor');
     })
-    .run(function ($state, $rootScope, authService, navigationService) {
+    .run(function ($state, $rootScope, authService, navigationService, pinService) {
 
         $rootScope.$on('$stateChangeStart', function (event, toState) {
 
             if (toState.authenticate) {
                 authService.authorize(function (authenticated) {
                     if (!authenticated) {
+                        // a part of dirty short polling hack
+                        pinService.stopPolling();
+
                         navigationService.goToLoginState();
                         event.preventDefault();
                     }

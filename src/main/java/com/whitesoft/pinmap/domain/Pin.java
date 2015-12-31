@@ -1,11 +1,11 @@
 package com.whitesoft.pinmap.domain;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import sun.util.calendar.BaseCalendar;
 
 import java.util.Date;
 
@@ -26,13 +26,20 @@ public class Pin {
 
     private String description;
 
+    @Indexed
     private GeoJsonPoint location;
 
+    @Indexed
     private Date created;
 
-    @DBRef
+    @DBRef(lazy = true)
     @Indexed
     private User user;
+
+    /**
+     * denormalized User#username
+     */
+    private String username;
 
     public String getId() {
         return id;
@@ -76,5 +83,13 @@ public class Pin {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

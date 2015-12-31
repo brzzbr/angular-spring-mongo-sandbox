@@ -192,62 +192,14 @@
                 </configuration>
             </plugin>
 
-            <!--<plugin>-->
-                <!--&lt;!&ndash; Подключаем node.js и некоторые пакеты на него &ndash;&gt;-->
-                <!--<groupId>com.github.eirslett</groupId>-->
-                <!--<artifactId>frontend-maven-plugin</artifactId>-->
-                <!--<version>0.0.26</version>-->
-                <!--<executions>-->
-                    <!--&lt;!&ndash; Устанавливаем сам node.js &ndash;&gt;-->
-                    <!--<execution>-->
-                        <!--<id>install node and npm</id>-->
-                        <!--<goals>-->
-                            <!--<goal>install-node-and-npm</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<nodeVersion>v5.2.0</nodeVersion>-->
-                            <!--<npmVersion>3.5.2</npmVersion>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                     <!--Устанавливаем пакетный менеджер npm-->
-                    <!--<execution>-->
-                    <!--<id>npm install</id>-->
-                    <!--<phase>generate-resources</phase>-->
-                    <!--<goals>-->
-                    <!--<goal>npm</goal>-->
-                    <!--</goals>-->
-                    <!--<configuration>-->
-                    <!--<arguments>install</arguments>-->
-                    <!--</configuration>-->
-                    <!--</execution>-->
-                     <!--Запускаем bower-->
-                    <!--<execution>-->
-                        <!--<id>bower install</id>-->
-                        <!--<phase>generate-resources</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>bower</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<arguments>install</arguments>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                    <!--&lt;!&ndash; Запуск билда через Gulp &ndash;&gt;-->
-                    <!--<execution>-->
-                        <!--<id>gulp build</id>-->
-                        <!--<goals>-->
-                            <!--<goal>gulp</goal>-->
-                        <!--</goals>-->
-                        <!--<phase>generate-resources</phase>-->
-                        <!--<configuration>-->
-                            <!--&lt;!&ndash;<arguments>&#45;&#45;ignore widgets,tasks,references,queryBuilder,documentExplorer,testNavTree</arguments>&ndash;&gt;-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                    <!--<workingDirectory>src/main/webapp</workingDirectory>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <packagingExcludes>node/**, node_modules/**</packagingExcludes>
+                </configuration>
+            </plugin>
         </plugins>
 
         <!--Замена пропертей на значения из pom-->
@@ -285,25 +237,25 @@
 
                             <!--Doesn't work with related DFRef data!!-->
                             <!--<execution>-->
-                                <!--<id>mongo-import</id>-->
-                                <!--<phase>pre-integration-test</phase>-->
-                                <!--<goals>-->
-                                    <!--<goal>mongo-import</goal>-->
-                                <!--</goals>-->
-                                <!--<configuration>-->
-                                    <!--<version>${version.mongo}</version>-->
-                                    <!--<defaultImportDatabase>local</defaultImportDatabase>-->
-                                    <!--<imports>-->
-                                        <!--<import>-->
-                                            <!--<collection>users</collection>-->
-                                            <!--<file>${project.basedir}/src/main/resources/mongotestdata/users.json</file>-->
-                                        <!--</import>-->
-                                        <!--<import>-->
-                                            <!--<collection>pins</collection>-->
-                                            <!--<file>${project.basedir}/src/main/resources/mongotestdata/pins.json</file>-->
-                                        <!--</import>-->
-                                    <!--</imports>-->
-                                <!--</configuration>-->
+                            <!--<id>mongo-import</id>-->
+                            <!--<phase>pre-integration-test</phase>-->
+                            <!--<goals>-->
+                            <!--<goal>mongo-import</goal>-->
+                            <!--</goals>-->
+                            <!--<configuration>-->
+                            <!--<version>${version.mongo}</version>-->
+                            <!--<defaultImportDatabase>local</defaultImportDatabase>-->
+                            <!--<imports>-->
+                            <!--<import>-->
+                            <!--<collection>users</collection>-->
+                            <!--<file>${project.basedir}/src/main/resources/mongotestdata/users.json</file>-->
+                            <!--</import>-->
+                            <!--<import>-->
+                            <!--<collection>pins</collection>-->
+                            <!--<file>${project.basedir}/src/main/resources/mongotestdata/pins.json</file>-->
+                            <!--</import>-->
+                            <!--</imports>-->
+                            <!--</configuration>-->
                             <!--</execution>-->
 
                             <execution>
@@ -396,6 +348,59 @@
                                 </goals>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>prepare-frontend</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- Подключаем node.js и некоторые пакеты на него -->
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>0.0.26</version>
+                        <executions>
+                            <execution>
+                                <id>install node and npm</id>
+                                <goals>
+                                    <goal>install-node-and-npm</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <nodeVersion>v5.2.0</nodeVersion>
+                                    <npmVersion>3.5.2</npmVersion>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>npm install</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                            </execution>
+                            <execution>
+                                <id>bower install</id>
+                                <goals>
+                                    <goal>bower</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>install</arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>gulp build</id>
+                                <goals>
+                                    <goal>gulp</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <workingDirectory>src/main/webapp</workingDirectory>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

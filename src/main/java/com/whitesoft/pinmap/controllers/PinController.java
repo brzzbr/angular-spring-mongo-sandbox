@@ -1,15 +1,14 @@
 package com.whitesoft.pinmap.controllers;
 
-import com.whitesoft.pinmap.converters.PinToPinDTOConverter;
 import com.whitesoft.pinmap.domain.Pin;
+import com.whitesoft.pinmap.domain.User;
+import com.whitesoft.pinmap.dto.CollectionDTO;
 import com.whitesoft.pinmap.dto.PinDTO;
-import com.whitesoft.pinmap.dto.PinsCollectionDTO;
 import com.whitesoft.pinmap.services.PinService;
+import com.whitesoft.pinmap.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -26,23 +25,28 @@ import java.util.stream.Collectors;
 public class PinController {
 
     @Autowired
+    protected UserService userService;
+
+    @Autowired
     protected PinService pinService;
 
     @Autowired
-    protected PinToPinDTOConverter converter;
+    protected ConversionService conversionService;
 
     /**
      * Gets pins for current authenticated user
-     * @return collection of current user's pins
+     * @return collection of current user's pins with pins of subscription-users
      */
     @RequestMapping(
-            value = "/mypins",
+            value = "/pins",
             method = RequestMethod.GET
     )
-    public PinsCollectionDTO getMyPins(){
+    public CollectionDTO<PinDTO> getPins(
+            @RequestParam(value = "fromdate", required = false) Date fromDate){
 
-        return new PinsCollectionDTO(pinService.getMyPins().stream()
-                .map(converter::convert)
+        User user = userService.getCurrentUser();
+        return new CollectionDTO<>(pinService.getPins(user, fromDate).stream()
+                .map(pin -> conversionService.convert(pin, PinDTO.class))
                 .collect(Collectors.toList()));
     }
 
@@ -52,11 +56,11 @@ public class PinController {
      * @return inserted pin
      */
     @RequestMapping(
-            value = "/mypins",
+            value = "/pins",
             method = RequestMethod.POST,
             consumes = "application/json"
     )
-    public PinDTO addMyPin(@RequestBody PinDTO pin){
+    public PinDTO addPin(@RequestBody PinDTO pin){
 
         Pin pinToInsert = new Pin();
         pinToInsert.setName(pin.getName());
@@ -64,7 +68,8 @@ public class PinController {
         pinToInsert.setLocation(pin.getLocation());
         pinToInsert.setCreated(new Date());
 
-        Pin insertedPin = pinService.addMyPin(pinToInsert);
-        return converter.convert(insertedPin);
+        User user = userService.getCurrentUser();
+        Pin insertedPin = pinService.addMyPin(user, pinToInsert);
+        return conversionService.convert(insertedPin, PinDTO.class);
     }
 }
