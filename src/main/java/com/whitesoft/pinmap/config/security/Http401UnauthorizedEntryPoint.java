@@ -1,7 +1,12 @@
 package com.whitesoft.pinmap.config.security;
 
+import com.google.gson.Gson;
+import com.whitesoft.pinmap.config.serialization.GSONFactory;
+import com.whitesoft.pinmap.dto.ErrorDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -19,6 +24,8 @@ import java.io.IOException;
 @Component
 public class Http401UnauthorizedEntryPoint implements AuthenticationEntryPoint {
 
+    private Gson gson = GSONFactory.getGson();
+
     private final Logger log = LoggerFactory.getLogger(Http401UnauthorizedEntryPoint.class);
 
     /**
@@ -32,7 +39,10 @@ public class Http401UnauthorizedEntryPoint implements AuthenticationEntryPoint {
         log.debug("Pre-authenticated entry point called. Rejecting access");
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getOutputStream().println("{ \"error\": \"Alarm! Access Denied!\" }");
+
+        ErrorDTO err = new ErrorDTO(BadCredentialsException.class.getCanonicalName(), "", "Alarm! Access Denied!");
+        String jsonErr = gson.toJson(err);
+        response.getOutputStream().println(jsonErr);
 
     }
 }

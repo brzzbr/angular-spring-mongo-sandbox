@@ -6,6 +6,8 @@ import com.whitesoft.pinmap.dto.CollectionDTO;
 import com.whitesoft.pinmap.dto.PinDTO;
 import com.whitesoft.pinmap.services.PinService;
 import com.whitesoft.pinmap.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +35,8 @@ public class PinController {
     @Autowired
     protected ConversionService conversionService;
 
+    private static Logger logger = LoggerFactory.getLogger(PinController.class);
+
     /**
      * Gets pins for current authenticated user
      * @return collection of current user's pins with pins of subscription-users
@@ -45,6 +49,9 @@ public class PinController {
             @RequestParam(value = "fromdate", required = false) Date fromDate){
 
         User user = userService.getCurrentUser();
+
+        logger.debug("User {} gets his pins", user.getUsername());
+
         return new CollectionDTO<>(pinService.getPins(user, fromDate).stream()
                 .map(pin -> conversionService.convert(pin, PinDTO.class))
                 .collect(Collectors.toList()));
@@ -69,6 +76,9 @@ public class PinController {
         pinToInsert.setCreated(new Date());
 
         User user = userService.getCurrentUser();
+
+        logger.debug("User {} adds pin {}", user.getUsername(), pin.getName());
+
         Pin insertedPin = pinService.addMyPin(user, pinToInsert);
         return conversionService.convert(insertedPin, PinDTO.class);
     }
