@@ -1,5 +1,10 @@
 /**
  * Created by borisbondarenko on 23.12.15.
+ *
+ * @description
+ * Core functionality service for manage the pins/
+ *
+ * @author brzzbr
  */
 (function () {
 
@@ -21,6 +26,10 @@
             stopPolling: stopPolling
         };
 
+        /**
+         * retrieves all the pins accessible for user
+         * @returns {*}
+         */
         function getMyPins() {
             return pinResource.get().$promise
                 .then(function (pins) {
@@ -34,6 +43,11 @@
                 });
         }
 
+        /**
+         * adds a pin for a user
+         * @param pin
+         * @returns {*}
+         */
         function addPin(pin) {
             return pinResource.save(pin).$promise
                 .then(function (result) {
@@ -45,9 +59,12 @@
                 });
         }
 
-        // due to some technical issues with web-sockets and XAuth
-        // I forced to use a dirty hack named "short polling" to retrieve
-        // new pins placed by authors of user's subscriptions.
+        /**
+         * Due to some technical issues with web-sockets and XAuth
+         * I forced to use a dirty hack named "short polling" to retrieve
+         * new pins placed by authors of user's subscriptions.
+         * @param callback
+         */
         function pinsPoller(callback) {
 
             pollerCallback = callback;
@@ -69,6 +86,9 @@
             poll = setInterval(poller, 5000);
         }
 
+        /**
+         * stops this miserable polling stuff
+         */
         function stopPolling() {
             clearInterval(poll);
         }

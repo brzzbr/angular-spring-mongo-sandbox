@@ -1,9 +1,15 @@
 /**
  * Created by borisbondarenko on 22.12.15.
+ *
+ * @description
+ * A couple of interceptors to handle with token-based security.
+ *
+ * @author brzzbr
  */
 (function () {
 
     angular.module('pinmap')
+        // simply adds an "x-auth-token" header to each request sent from the client
         .factory('authInterceptor', function ($q, localStorageService) {
             return {
                 // Add authorization token to headers
@@ -19,6 +25,7 @@
                 }
             };
         })
+        // handles the situation of token expiration
         .factory('authExpiredInterceptor', function ($q, $injector, localStorageService) {
             return {
                 responseError: function (response) {

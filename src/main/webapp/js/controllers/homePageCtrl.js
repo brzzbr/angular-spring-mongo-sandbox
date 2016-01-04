@@ -1,5 +1,10 @@
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * @description
+ * A controller for a main page.
+ *
+ * @author brzzbr
  */
 (function () {
 
@@ -10,7 +15,7 @@
 
         var thisCtrl = this;
 
-        // user firstName
+        // user name
         thisCtrl.username = '';
         // adds GoogleMap
         thisCtrl.map = {};
@@ -133,12 +138,18 @@
             notifyService.success('Hi there!');
         }
 
+        /**
+         * logout function
+         */
         function logout() {
 
             pinService.stopPolling();
             authService.logout();
         }
 
+        /**
+         * simpy adds new pin
+         */
         function addNewPin() {
 
             var pin = {
@@ -158,6 +169,10 @@
             thisCtrl.addPin.show = false;
         }
 
+        /**
+         * function that allows to subscribe on user
+         * @param user
+         */
         function subscribeOnUser(user) {
             subService.subscribe(user)
                 .then(function (result) {
@@ -173,6 +188,10 @@
             thisCtrl.userToSubscribe = '';
         }
 
+        /**
+         * function that allows to unsubscribe from user
+         * @param user
+         */
         function unsubscribeFromUser(user) {
 
             subService.unsubscribe(user)
@@ -232,6 +251,9 @@
             };
         }
 
+        /**
+         * function for refreshing all the pins info
+         */
         function refreshPins() {
 
             pinService.getMyPins()
@@ -244,6 +266,9 @@
                 });
         }
 
+        /**
+         * function for refreshing all the subs info
+         */
         function refreshSubs() {
 
             subService.getMySubs()

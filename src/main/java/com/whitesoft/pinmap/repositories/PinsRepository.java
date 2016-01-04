@@ -59,7 +59,7 @@ public interface PinsRepository extends MongoRepository<Pin, String> {
     /**
      * Deletes all the pins for user
      * @param user user whom pins are gonna be deleted
-     * @return deleted pins3
+     * @return deleted pins
      */
     List<Pin> deleteByUser(User user);
 }

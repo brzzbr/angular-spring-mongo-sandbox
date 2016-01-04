@@ -1,4 +1,4 @@
-package com.whitesoft.pinmap.services;
+package com.whitesoft.pinmap.config.security;
 
 /**
  * Created by borisbondarenko on 19.12.15.

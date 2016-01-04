@@ -1,5 +1,10 @@
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * @description
+ * Service for authentication (login/logout)
+ *
+ * @author brzzbr
  */
 (function () {
 

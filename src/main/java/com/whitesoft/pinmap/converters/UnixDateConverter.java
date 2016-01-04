@@ -7,6 +7,11 @@ import java.util.Date;
 
 /**
  * Created by borisbondarenko on 30.12.15.
+ *
+ * I had an intention to use UNIX-timestamps as datetime-representation in the
+ * project, why not? So here is the converter for it.
+ *
+ * @author brzzbr
  */
 @Component
 @MyConverter
