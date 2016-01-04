@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var inject = require('gulp-inject');
-var wiredep = require('wiredep').stream;r;
+var wiredep = require('wiredep').stream;
 
 gulp.task('copy-fonts', function(){
 

@@ -21,6 +21,8 @@
         <mongo.host>localhost</mongo.host>
         <mongo.port>27017</mongo.port>
         <mongo.db>local</mongo.db>
+
+        <jetty.goal>run</jetty.goal>
     </properties>
 
     <dependencies>
@@ -298,6 +300,9 @@
 
         <profile>
             <id>ITs</id>
+            <properties>
+                <jetty.goal>start</jetty.goal>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -316,11 +321,6 @@
                                 <phase>integration-test</phase>
                                 <goals>
                                     <goal>integration-test</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>verify-integration-tests</id>
-                                <goals>
                                     <goal>verify</goal>
                                 </goals>
                             </execution>
@@ -360,7 +360,7 @@
                                 <id>start-jetty</id>
                                 <phase>pre-integration-test</phase>
                                 <goals>
-                                    <goal>run</goal>
+                                    <goal>${jetty.goal}</goal>
                                 </goals>
                                 <configuration>
                                     <scanIntervalSeconds>0</scanIntervalSeconds>

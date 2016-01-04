@@ -1,3 +1,6 @@
+/**
+ * Unit-tests for login page controller
+ */
 describe('LoginController tests', function () {
 
     var correctUsername = 'username';
@@ -22,6 +25,9 @@ describe('LoginController tests', function () {
         goToDefaultState: function(){}
     };
 
+    /**
+     * With correct credentials user proceeds with login
+     */
     it('should correctly login',
         inject(function ($rootScope, $controller) {
 
@@ -43,6 +49,9 @@ describe('LoginController tests', function () {
         })
     );
 
+    /**
+     * With incorrect credentials user wouldn't login
+     */
     it('should fail login',
         inject(function ($rootScope, $controller) {
 
