@@ -15,3 +15,10 @@
 *.iml
 *.iws
 *.db
+
+.DS_Store
+src/main/webapp/node
+src/main/webapp/node_modules
+src/main/webapp/dist
+src/main/webapp/lib
+src/main/webapp/fonts

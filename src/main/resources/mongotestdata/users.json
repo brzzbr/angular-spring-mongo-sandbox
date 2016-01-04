@@ -1,0 +1,30 @@
+{
+  "_id" : ObjectId("567a8223c300e960ed04c71b"),
+  "_class" : "com.whitesoft.pinmap.domain.User",
+  "login" : "tzarivan",
+  "email" : "tzarivan@kremlin.com",
+  "firstName" : "Ivan",
+  "lastName" : "Tzar",
+  "password" : "827ccb0eea8a706c4c34a16891f84e7b",
+  "lastLogin" : {$date:"2013-11-20T23:32:18Z"}
+},
+{
+  "_id" : ObjectId("111111111111111111111112"),
+  "_class" : "com.whitesoft.pinmap.domain.User",
+  "login" : "johndoe",
+  "email" : "johndoe@gmail.com",
+  "firstName" : "John",
+  "lastName" : "Doe",
+  "password" : "827ccb0eea8a706c4c34a16891f84e7b",
+  "lastLogin" : {$date:"2013-11-20T23:32:18Z"}
+},
+{
+  "_id" : ObjectId("111111111111111111111113"),
+  "_class" : "com.whitesoft.pinmap.domain.User",
+  "login" : "kermit",
+  "email" : "kermit@gmail.com",
+  "firstName" : "Kermit",
+  "lastName" : "Thefrog",
+  "password" : "827ccb0eea8a706c4c34a16891f84e7b",
+  "lastLogin" : {$date:"2013-11-20T23:32:18Z"}
+}
