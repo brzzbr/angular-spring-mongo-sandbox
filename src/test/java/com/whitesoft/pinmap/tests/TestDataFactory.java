@@ -52,7 +52,7 @@ public final class TestDataFactory {
      * user-1 is subscriber
      * @return correct test usb
      */
-    public static Sub gettestSub(User author, User subscriber){
+    public static Sub getValidSub(User author, User subscriber){
 
         Sub result = new Sub();
         result.setAuthor(author);

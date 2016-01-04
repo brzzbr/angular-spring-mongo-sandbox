@@ -87,7 +87,7 @@ public class PinServiceImplTest {
         // Arrange
         User subscriber = getValidTestUser();
         User authorUser = getValidTestUser_2();
-        Sub sub = gettestSub(authorUser, subscriber);
+        Sub sub = getValidSub(authorUser, subscriber);
         List<Pin> pins = getTestPins(subscriber, 10);
         pins.addAll(getTestPins(authorUser, 5));
         Mockito.when(pinsRepository.findByUserIn(argThat(
@@ -132,7 +132,7 @@ public class PinServiceImplTest {
         // Arrange
         User subscriber = getValidTestUser();
         User authorUser = getValidTestUser_2();
-        Sub sub = gettestSub(authorUser, subscriber);
+        Sub sub = getValidSub(authorUser, subscriber);
         List<Pin> pins = getTestPins(subscriber, 10);
         pins.addAll(getTestPins(authorUser, 5));
         Mockito.when(pinsRepository.findByUserInAndCreatedGreaterThan(argThat(
