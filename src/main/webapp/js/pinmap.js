@@ -1,7 +1,12 @@
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * @description
+ * The application. Only two states and a handler to check the authentication
+ * after each state changes.
+ *
+ * @author brzzbr
  */
-
 angular.module('pinmap', ['LocalStorageModule', 'ui.router', 'uiGmapgoogle-maps', 'ngResource', 'cgNotify'])
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 

@@ -21,6 +21,8 @@
         <mongo.host>localhost</mongo.host>
         <mongo.port>27017</mongo.port>
         <mongo.db>local</mongo.db>
+
+        <jetty.goal>run</jetty.goal>
     </properties>
 
     <dependencies>
@@ -112,8 +114,8 @@
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-nop</artifactId>
-            <version>1.6.1</version>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.10</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -193,11 +195,37 @@
             </plugin>
 
             <plugin>
+                <groupId>com.kelveden</groupId>
+                <artifactId>maven-karma-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <karmaExecutable>${project.basedir}/src/main/webapp/node_modules/.bin/karma</karmaExecutable>
+                    <configFile>${project.basedir}/src/main/webapp/karma.conf.js</configFile>
+                    <browsers>PhantomJS</browsers>
+                    <autoWatch>false</autoWatch>
+                    <singleRun>true</singleRun>
+                    <colors>true</colors>
+                    <skipKarma>false</skipKarma>
+                    <skipTests>false</skipTests>
+                    <karmaFailureIgnore>false</karmaFailureIgnore>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
                     <packagingExcludes>node/**, node_modules/**</packagingExcludes>
+                    <warSourceExcludes>node/**, node_modules/**</warSourceExcludes>
                 </configuration>
             </plugin>
         </plugins>
@@ -272,6 +300,9 @@
 
         <profile>
             <id>ITs</id>
+            <properties>
+                <jetty.goal>start</jetty.goal>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -290,11 +321,6 @@
                                 <phase>integration-test</phase>
                                 <goals>
                                     <goal>integration-test</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>verify-integration-tests</id>
-                                <goals>
                                     <goal>verify</goal>
                                 </goals>
                             </execution>
@@ -334,7 +360,7 @@
                                 <id>start-jetty</id>
                                 <phase>pre-integration-test</phase>
                                 <goals>
-                                    <goal>run</goal>
+                                    <goal>${jetty.goal}</goal>
                                 </goals>
                                 <configuration>
                                     <scanIntervalSeconds>0</scanIntervalSeconds>

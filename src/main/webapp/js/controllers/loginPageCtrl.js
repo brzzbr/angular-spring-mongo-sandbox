@@ -1,5 +1,10 @@
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * @description
+ * A controller for a login page.
+ *
+ * @author brzzbr
  */
 (function () {
 

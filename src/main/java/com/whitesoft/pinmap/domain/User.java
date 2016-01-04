@@ -22,7 +22,6 @@ public class User {
     @Indexed
     private String username;
     private String password;
-    private Date lastLogin;
 
     public String getId() {
         return id;
@@ -43,13 +42,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Date getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(Date lastLogin) {
-        this.lastLogin = lastLogin;
-    }
-
 }

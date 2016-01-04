@@ -1,5 +1,10 @@
 /**
  * Created by borisbondarenko on 25.12.15.
+ *
+ * @description
+ * User service. Allows to get user info.
+ *
+ * @author brzzbr
  */
 (function () {
 
@@ -15,12 +20,21 @@
             getUser: getUser
         };
 
+        /**
+         * Simply gets currnt user
+         * @returns {*}
+         */
         function getCurrentUser() {
 
             var currentUserName = localStorageService.get('currentUser');
             return getUser(currentUserName);
         }
 
+        /**
+         * Gets some user's info
+         * @param username
+         * @returns {*}
+         */
         function getUser(username) {
 
             return userResource.get({id: username}).$promise

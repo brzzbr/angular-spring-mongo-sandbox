@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by borisbondarenko on 27.12.15.
  * <p/>
  * Factory for GSON (de)serializer. It has some specifics like
- * type adapter for UNIX-date serialization.
+ * type adapter for UNIX-date serialization and GeoJsonPoint serialization.
  *
  * @author brzzbr
  */

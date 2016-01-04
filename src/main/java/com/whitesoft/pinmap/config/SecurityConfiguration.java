@@ -3,7 +3,6 @@ package com.whitesoft.pinmap.config;
 import com.whitesoft.pinmap.config.security.*;
 import com.whitesoft.pinmap.config.security.xauth.TokenProvider;
 import com.whitesoft.pinmap.config.security.xauth.XAuthTokenConfigurer;
-import com.whitesoft.pinmap.services.UserRoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

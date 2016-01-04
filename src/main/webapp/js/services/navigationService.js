@@ -1,56 +1,35 @@
 /**
  * Created by borisbondarenko on 21.12.15.
+ *
+ * @description
+ * Primitive navigation service that allows to roam among two
+ * states -- login and default.
+ *
+ * @author brzzbr
  */
 (function () {
 
     angular.module('pinmap')
-        .service('navigationService', ['$window', '$state', navigationService]);
+        .service('navigationService', ['$state', navigationService]);
 
-    function navigationService($window, $state) {
+    function navigationService($state) {
 
         return{
-            goToPreviousState: goToPreviousState,
             goToDefaultState: goToDefaultState,
             goToLoginState: goToLoginState
         };
 
-        function goToPreviousState() {
-            /**
-             * Вытягиваем структуру предыдущего состояния.
-             * Формат: { state: string, params: object }
-             */
-            var returnParams = $window.localStorage.getItem('returnParams');
-            // Удаляем информацию о предыдущем состоянии
-            $window.localStorage.removeItem('returnParams');
-            // Пробуем преобразовать то что вытащили в JSON object.
-            // Если это не получилось, то идём в стандартное состояние
-            var defaultState = getDefaultState();
-            try {
-                returnParams = JSON.parse(returnParams);
-                // Вытаскиваем наименование предыдущего состояния
-                var state = returnParams && !returnParams.state ? defaultState.state : returnParams.state;
-                // Вытаскиваем параметры предыдущего состояния
-                // В случае если предыдущего состояния нет, то параметры будут пустыми
-                var params = returnParams && returnParams.state && returnParams.params ? returnParams.params : {};
-                // Мы идём с экрана логина или блокировки - незачем возвращаться на них или на logout
-                if (state === 'login' || state === 'logout') {
-                    //получаем state по умолчанию
-                    $state.go(defaultState.state, defaultState.params);
-                } else {
-
-                    $state.go(state, params);
-                }
-            } catch (e) {
-
-                $state.go(defaultState.state, defaultState.params);
-            }
-        }
-
+        /**
+         * go to default state with map and pins
+         */
         function goToDefaultState(){
             var defaultState = getDefaultState();
             $state.go(defaultState.state, defaultState.params);
         }
 
+        /**
+         * go to login page
+         */
         function goToLoginState(){
             $state.go('login');
         }

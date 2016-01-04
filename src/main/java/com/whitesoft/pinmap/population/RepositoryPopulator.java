@@ -49,7 +49,6 @@ public class RepositoryPopulator implements InitializingBean {
         User user_1 = new User();
         user_1.setUsername("tzarivan");
         user_1.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
-        user_1.setLastLogin(new Date());
         user_1 = usersRepository.insert(user_1);
 
         Pin pin_1_1 = new Pin();
@@ -101,7 +100,6 @@ public class RepositoryPopulator implements InitializingBean {
         User user_2 = new User();
         user_2.setUsername("johndoe");
         user_2.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
-        user_2.setLastLogin(new Date());
         user_2 = usersRepository.insert(user_2);
 
         Pin pin_2_1 = new Pin();
@@ -135,7 +133,6 @@ public class RepositoryPopulator implements InitializingBean {
         User user_3 = new User();
         user_3.setUsername("kermitthefrog");
         user_3.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
-        user_3.setLastLogin(new Date());
         user_3 = usersRepository.insert(user_3);
 
         Pin pin_3_1 = new Pin();

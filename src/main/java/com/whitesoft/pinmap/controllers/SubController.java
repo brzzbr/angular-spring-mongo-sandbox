@@ -6,6 +6,8 @@ import com.whitesoft.pinmap.dto.CollectionDTO;
 import com.whitesoft.pinmap.dto.SubDTO;
 import com.whitesoft.pinmap.services.SubService;
 import com.whitesoft.pinmap.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +37,8 @@ public class SubController {
     @Autowired
     protected ConversionService conversionService;
 
+    private static Logger logger = LoggerFactory.getLogger(SubController.class);
+
     /**
      * Gets all user's subscriptions
      * @return subscriptions
@@ -46,6 +50,9 @@ public class SubController {
     public CollectionDTO<SubDTO> getSubs(){
 
         User user = userService.getCurrentUser();
+
+        logger.debug("User {} gets his subs", user.getUsername());
+
         return new CollectionDTO<>(subService.getSubs(user).stream()
                 .map(sub -> conversionService.convert(sub, SubDTO.class))
                 .collect(Collectors.toList()));
@@ -63,6 +70,9 @@ public class SubController {
 
         User subscriber = userService.getCurrentUser();
         User author = userService.getUser(authorName);
+
+        logger.debug("User {} subscribes from {}", subscriber.getUsername(), author.getUsername());
+
         return conversionService.convert(subService.subscribe(subscriber, author), SubDTO.class);
     }
 
@@ -78,6 +88,9 @@ public class SubController {
 
         User subscriber = userService.getCurrentUser();
         User author = userService.getUser(authorName);
+
+        logger.debug("User {} subscribes on {}", subscriber.getUsername(), author.getUsername());
+
         subService.unsubscribe(subscriber, author);
     }
 }

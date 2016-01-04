@@ -1,5 +1,10 @@
 /**
  * Created by borisbondarenko on 22.12.15.
+ *
+ * @description
+ * "Low-level" login service for managin x-auth stuff.
+ *
+ * @author brzzbr
  */
 (function () {
 

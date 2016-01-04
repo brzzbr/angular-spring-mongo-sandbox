@@ -2,6 +2,8 @@ package com.whitesoft.pinmap.controllers;
 
 import com.whitesoft.pinmap.config.security.xauth.Token;
 import com.whitesoft.pinmap.config.security.xauth.TokenProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,6 +33,8 @@ public class AuthController {
     @Autowired
     protected UserDetailsService userDetailsService;
 
+    private static Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     /**
      * Authentication method. Works on POST verb.
      * @param username username
@@ -42,6 +46,8 @@ public class AuthController {
             method = RequestMethod.POST
     )
     public Token authorize(@RequestParam String username, @RequestParam String password) {
+
+        logger.debug("Authentication attempt for {}", username);
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         Authentication authentication = this.authenticationManager.authenticate(token);

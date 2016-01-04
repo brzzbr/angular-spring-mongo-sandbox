@@ -1,5 +1,10 @@
 /**
  * Created by borisbondarenko on 29.12.15.
+ *
+ * @description
+ * A which helps to handle enter-key press in the controll.
+ *
+ * @author brzzbr
  */
 (function () {
 

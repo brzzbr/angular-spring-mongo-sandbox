@@ -1,6 +1,7 @@
 package com.whitesoft.pinmap.tests;
 
 import com.whitesoft.pinmap.domain.Pin;
+import com.whitesoft.pinmap.domain.Sub;
 import com.whitesoft.pinmap.domain.User;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
@@ -37,10 +38,32 @@ public final class TestDataFactory {
         return result;
     }
 
-    public static List<Pin> getTestPins(){
+    public static User getValidTestUser_2(){
 
-        int count = 5;
-        User user = getValidTestUser();
+        User result = new User();
+        result.setUsername("testLogin_2");
+        result.setPassword("827ccb0eea8a706c4c34a16891f84e7b");
+
+        return result;
+    }
+
+    /**
+     * user-1 is subscribed on user-2. In other words user-2 is author,
+     * user-1 is subscriber
+     * @return correct test usb
+     */
+    public static Sub getValidSub(User author, User subscriber){
+
+        Sub result = new Sub();
+        result.setAuthor(author);
+        result.setSubscriber(subscriber);
+        result.setSince(new Date());
+
+        return result;
+    }
+
+    public static List<Pin> getTestPins(User user, int count){
+
         List<Pin> result = new ArrayList<>();
 
         for(int i = 0; i < count; i++) {

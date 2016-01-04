@@ -1,5 +1,10 @@
 /**
  * Created by borisbondarenko on 28.12.15.
+ *
+ * @description
+ * Service which allows a user to manage his subscribtions
+ *
+ * @author brzzbr
  */
 (function () {
 
@@ -27,6 +32,10 @@
             unsubscribe: unsubscribe
         };
 
+        /**
+         * gets all the subscriptions for current user
+         * @returns {*}
+         */
         function getMySubs() {
             return subResource.get().$promise
                 .then(function (subs) {
@@ -38,6 +47,11 @@
                 });
         }
 
+        /**
+         * allows to subscribe on user
+         * @param user
+         * @returns {*}
+         */
         function subscribe(user) {
             return subResource.subscribe({user: user}).$promise
                 .then(function (result) {
@@ -49,6 +63,11 @@
                 });
         }
 
+        /**
+         * allows to unsubscribe from user
+         * @param user
+         * @returns {*}
+         */
         function unsubscribe(user) {
             return subResource.unsubscribe({user: user}).$promise
                 .then(function (result) {
