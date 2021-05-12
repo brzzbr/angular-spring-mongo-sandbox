@@ -12,7 +12,7 @@
 
         <version.java>1.8</version.java>
         <version.spring>4.2.4.RELEASE</version.spring>
-        <version.springsecurity>4.0.3.RELEASE</version.springsecurity>
+        <version.springsecurity>5.2.10.RELEASE</version.springsecurity>
         <version.spring.mongodb>1.8.2.RELEASE</version.spring.mongodb>
         <version.jetty>9.3.6.v20151106</version.jetty>
         <version.embedmongo.plugin>0.3.2</version.embedmongo.plugin>
